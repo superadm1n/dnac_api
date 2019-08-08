@@ -123,7 +123,7 @@ class Discoveries(DNAServer):
 
     def physical_topology(self):
         url = '/topology/physical-topology'
-        return self.get_handler(url)
+        return self.response_handler(self.get_handler(url))
 
 
 class API(GlobalCredentials, Discoveries):
