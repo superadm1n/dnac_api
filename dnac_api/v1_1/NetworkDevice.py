@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from dnac_api.Server import DNAServer
+from dnac_api.lib.kwarg_hander import handle_kwargs
 
 
 class NetworkDevice(DNAServer):
@@ -27,9 +28,9 @@ class NetworkDevice(DNAServer):
         return self.response_handler(self.get_handler(url))
 
     @property
-    def network_devices(self):
+    def network_devices(self, id=None):
         url = '/network-device'
-        return self.response_handler(self.get_handler(url))
+        return self.response_handler(self.get_handler(url, params={'id': id} if id else None))
 
     def network_device_by_ip(self, ip):
         url = '/network-device/ip-address/{}'.format( ip)
@@ -50,14 +51,18 @@ class NetworkDevice(DNAServer):
 
 class Modules(DNAServer):
 
-    def modules_in_device(self, device_id):
+    def modules_in_device(self, device_id, **kwargs):
+        allowed_kwargs = ['limit', 'offset', 'nameList', 'vendorEquipmentTypeList', 'partNumberList', 'operationalStateCodeList']
         url = '/network-device/module'
         params = {'deviceId': device_id}
+        params = handle_kwargs(params, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=params))
 
-    def number_of_modules_in_device(self, device_id):
+    def number_of_modules_in_device(self, device_id, **kwargs):
+        allowed_kwargs = ['deviceId', 'nameList', 'vendorEquipmentTypeList', 'partNumberList', 'operationalStateCodeList']
         url = '/network-device/module/count'
         params = {'deviceId': device_id}
+        params = handle_kwargs(params, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=params))
 
     def module_info_by_id(self, module_id):

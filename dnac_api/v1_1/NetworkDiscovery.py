@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from dnac_api.Server import DNAServer
+from dnac_api.lib.kwarg_hander import handle_kwargs
 
 
 class GlobalCredentials(DNAServer):
@@ -98,13 +99,6 @@ class Discoveries(DNAServer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def _handle_kwargs(self, params, allowed_kwargs, **kwargs):
-        if kwargs:
-            for key, value, in kwargs.items():
-                if key not in allowed_kwargs:
-                    raise KeyError('URL parameter {} not allowed, please use one of the following {}'.format(key, ', '.join(allowed_kwargs)))
-                params[key] = value
-        return params
 
     @property
     def number_of_discoveries(self):
@@ -119,13 +113,13 @@ class Discoveries(DNAServer):
     def discovery_jobs_by_id(self, discovery_id, **kwargs):
         allowed_kwargs = ['offset', 'limit', 'ipAddress']
         url = '/discover/{}/job'.format(discovery_id)
-        url_params = self._handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
+        url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
     def network_devices_from_discovery_by_filters(self, discovery_id, **kwargs):
         allowed_kwargs = ['taskId', 'sortyBy', 'sortOrder', 'ipAddress', 'pingStatus', 'snmpStatus', 'cliStatus', 'netconfStatus', 'httpStatus']
         url = '/discovery/{}/summary'.format(discovery_id)
-        url_params = self._handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
+        url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
     def discovery_jobs_for_ip(self, ip, **kwargs):
@@ -134,7 +128,7 @@ class Discoveries(DNAServer):
         url = '/discovery/job'
         url_params = {'ipAddress': ip}
         # append additional paramenters
-        url_params = self._handle_kwargs(url_params, allowed_kwargs=allowed_kwargs, **kwargs)
+        url_params = handle_kwargs(url_params, allowed_kwargs=allowed_kwargs, **kwargs)
 
         response = self.get_handler(url, params=url_params)
         return self.response_handler(response)
