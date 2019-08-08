@@ -122,6 +122,7 @@ class TestPostHandler(TestCase):
         id = self.instance.post_handler('/my/url', data='Junk', custom_headers={'HeaderKey': 'HeaderValue'})
         self.assertEqual(self.instance.post_kwargs_passed[id]['headers']['HeaderKey'], 'HeaderValue')
 
+
 class TestResponseHandler(TestCase):
     def setUp(self) -> None:
         self.instance = TestableDNAServer('host', 'user', 'password')
