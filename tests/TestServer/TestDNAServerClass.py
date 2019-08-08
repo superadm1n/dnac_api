@@ -29,6 +29,11 @@ class ControlledRequestHandler(RequestHandler):
         self.get_kwargs_passed = {}
         self.get_url_passed = {}
 
+        self.post_url_passed = {}
+        self.post_data_passed = {}
+        self.post_json_passed = {}
+        self.post_kwargs_passed = {}
+
     def get(self, url, params=None, **kwargs):
         id = random.randint(1, 9999999999999999999)
         self.get_params_passed[id] = params
@@ -37,7 +42,12 @@ class ControlledRequestHandler(RequestHandler):
         return id
 
     def post(self, url, data, json=None, **kwargs):
-        pass
+        id = random.randint(1, 9999999999999999999)
+        self.post_url_passed[id] = url
+        self.post_data_passed[id] = data
+        self.post_json_passed[id] = json
+        self.post_kwargs_passed[id] = kwargs
+        return id
 
     def put(self, url, data, **kwargs):
         pass
@@ -90,3 +100,35 @@ class TestGetHandler(TestCase):
     def test_passes_url(self):
         id = self.instance.get_handler('/my/url')
         self.assertEqual(self.instance.get_url_passed[id], 'https://host/api/v1/my/url')
+
+
+class TestPostHandler(TestCase):
+    def setUp(self) -> None:
+        self.instance = TestableDNAServer('host', 'user', 'password')
+
+    def test_passes_url_properly(self):
+        id = self.instance.post_handler('/my/url', data='Junk')
+        self.assertEqual(self.instance.post_url_passed[id], 'https://host/api/v1/my/url')
+
+    def test_passes_data_properly(self):
+        id = self.instance.post_handler('/my/url', data='Junk')
+        self.assertEqual(self.instance.post_data_passed[id], 'Junk')
+
+    def test_includes_token_in_header(self):
+        id = self.instance.post_handler('/my/url', data='Junk')
+        self.assertEqual(self.instance.post_kwargs_passed[id]['headers']['x-auth-token'], 'JunkToken')
+
+    def test_passes_custom_headers_properly(self):
+        id = self.instance.post_handler('/my/url', data='Junk', custom_headers={'HeaderKey': 'HeaderValue'})
+        self.assertEqual(self.instance.post_kwargs_passed[id]['headers']['HeaderKey'], 'HeaderValue')
+
+class TestResponseHandler(TestCase):
+    def setUp(self) -> None:
+        self.instance = TestableDNAServer('host', 'user', 'password')
+
+    def test_basic_test(self):
+        class ReturnObj:
+            def json(self):
+                return {'response': 'JunkResponse'}
+        return_obj = ReturnObj()
+        self.assertEqual(self.instance.response_handler(return_obj), 'JunkResponse')
