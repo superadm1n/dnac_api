@@ -27,6 +27,9 @@ class TestNetworkDevice(TestCase):
     def test_calls_response_handler(self):
         self.assertEqual(self.instance.response_handler_called, 1)
 
+    def test_doesnt_pass_params_without_id_called(self):
+        self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], None)
+
     def test_handles_id_param(self):
         id = self.instance.network_devices('junk')
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[id]['id'], 'junk')
