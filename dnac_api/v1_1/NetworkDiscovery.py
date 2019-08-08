@@ -108,10 +108,19 @@ class Discoveries(DNAServer):
         url = '/discovery/{}'.format(id)
         return self.response_handler(self.get_handler(url))
 
-    def discovery_jobs_for_ip(self, ip):
+    def discovery_jobs_for_ip(self, ip, **kwargs):
         '''Untested'''
+        allowed_kwargs = ['offset, limit, name']
         url = '/discovery/job'
-        response = self.get_handler(url, params={'ipAddress': ip})
+        url_params = {'ipAddress': ip}
+        # append additional paramenters
+        if kwargs:
+            for key, value, in kwargs.items():
+                if key not in allowed_kwargs:
+                    raise KeyError('URL parameter {} not allowed, please use one of the following {}'.format(key, ', '.join(allowed_kwargs)))
+                url_params[key] = value
+
+        response = self.get_handler(url, params=url_params)
         return self.response_handler(response)
 
     def physical_topology(self):
