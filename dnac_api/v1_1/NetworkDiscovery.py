@@ -111,17 +111,22 @@ class Discoveries(DNAServer):
         url = '/discovery/count'
         return self.get_handler(url).json()['response']
 
-    def discovery_by_id(self, id):
+    def discovery_by_id(self, discovery_id):
         '''Untested'''
-        url = '/discovery/{}'.format(id)
+        url = '/discovery/{}'.format(discovery_id)
         return self.response_handler(self.get_handler(url))
 
-    def discovery_jobs_by_id(self, id, **kwargs):
+    def discovery_jobs_by_id(self, discovery_id, **kwargs):
         allowed_kwargs = ['offset', 'limit', 'ipAddress']
-        url = '/discover/{}/job'.format(id)
+        url = '/discover/{}/job'.format(discovery_id)
         url_params = self._handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
+    def network_devices_from_discovery_by_filters(self, discovery_id, **kwargs):
+        allowed_kwargs = ['taskId', 'sortyBy', 'sortOrder', 'ipAddress', 'pingStatus', 'snmpStatus', 'cliStatus', 'netconfStatus', 'httpStatus']
+        url = '/discovery/{}/summary'.format(discovery_id)
+        url_params = self._handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
+        return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
     def discovery_jobs_for_ip(self, ip, **kwargs):
         '''Untested'''
