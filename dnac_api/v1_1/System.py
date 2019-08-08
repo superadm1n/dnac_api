@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from dnac_api.Server import DNAServer
 
-class ServerAPI(DNAServer):
+class SystemAPI(DNAServer):
 
     # TODO: Add the Put, Post, and Delete routes to the API
 
