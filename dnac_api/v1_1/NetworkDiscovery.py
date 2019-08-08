@@ -134,11 +134,7 @@ class Discoveries(DNAServer):
         url = '/discovery/job'
         url_params = {'ipAddress': ip}
         # append additional paramenters
-        if kwargs:
-            for key, value, in kwargs.items():
-                if key not in allowed_kwargs:
-                    raise KeyError('URL parameter {} not allowed, please use one of the following {}'.format(key, ', '.join(allowed_kwargs)))
-                url_params[key] = value
+        url_params = self._handle_kwargs(url_params, allowed_kwargs=allowed_kwargs, **kwargs)
 
         response = self.get_handler(url, params=url_params)
         return self.response_handler(response)
