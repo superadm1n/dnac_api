@@ -24,7 +24,7 @@ class NetworkHost(DNAServer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.url = '{}/host'.format(self.base_url)
+        self.url = '/host'
 
     def hosts_by_filter(self, **kwargs):
         '''
@@ -51,5 +51,5 @@ class NetworkHost(DNAServer):
         return self.response_handler(self.get_handler(url))
 
     def host_by_id(self, id):
-        url = '{}/{}'.format(self.base_url, id)
+        url = '/{}'.format(id)
         return self.response_handler(self.get_handler(url))

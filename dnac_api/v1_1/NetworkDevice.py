@@ -23,45 +23,45 @@ class NetworkDevice(DNAServer):
 
     @property
     def network_device_count(self):
-        url = '{}/network-device/count'.format(self.base_url)
+        url = '/network-device/count'
         return self.response_handler(self.get_handler(url))
 
     @property
     def network_devices(self):
-        url = '{}/network-device'.format(self.base_url)
+        url = '/network-device'
         return self.response_handler(self.get_handler(url))
 
     def network_device_by_ip(self, ip):
-        url = '{}/network-device/ip-address/{}'.format(self.base_url, ip)
+        url = '/network-device/ip-address/{}'.format( ip)
         return self.response_handler(self.get_handler(url))
 
     def network_device_by_serial_number(self, device_serial_number):
-        url = '{}/network-device/serial-number/{}'.format(self.base_url, device_serial_number)
+        url = '/network-device/serial-number/{}'.format(device_serial_number)
         return self.response_handler(self.get_handler(url))
 
     def network_device_by_id(self, id):
-        url = '{}/network-device/{}'.format(self.base_url, id)
+        url = '/network-device/{}'.format(id)
         return self.response_handler(self.get_handler(url))
 
     def network_device_brief_by_id(self, id):
-        url = '{}/network-device/{}/brief'.format(self.base_url, id)
+        url = '/network-device/{}/brief'.format(id)
         return self.response_handler(self.get_handler(url))
 
 
 class Modules(DNAServer):
 
     def modules_in_device(self, device_id):
-        url = '{}/network-device/module'.format(self.base_url)
+        url = '/network-device/module'
         params = {'deviceId': device_id}
         return self.response_handler(self.get_handler(url, params=params))
 
     def number_of_modules_in_device(self, device_id):
-        url = '{}/network-device/module/count'.format(self.base_url)
+        url = '/network-device/module/count'
         params = {'deviceId': device_id}
         return self.response_handler(self.get_handler(url, params=params))
 
     def module_info_by_id(self, module_id):
-        url = '{}/network-device/module/{}'.format(self.base_url, module_id)
+        url = '/network-device/module/{}'.format(module_id)
         return self.response_handler(self.get_handler(url))
 
 
@@ -69,15 +69,15 @@ class Locations(DNAServer):
 
     @property
     def devices_with_location(self):
-        url = '{}/network-device/location'.format(self.base_url)
+        url = '/network-device/location'
         return self.response_handler(self.get_handler(url))
 
     def devices_at_location(self, location_id):
-        url = '{}/network-device/location/{}'.format(self.base_url, location_id)
+        url = '/network-device/location/{}'.format(location_id)
         return self.response_handler(self.get_handler(url))
 
     def location_by_device_id(self, device_id):
-        url = '{base_url}/network-device/{device_id}/location'.format(**{'base_url': self.base_url, 'device_id': device_id})
+        url = '/network-device/{}/location'.format(device_id)
         return self.response_handler(self.get_handler(url))
 
 

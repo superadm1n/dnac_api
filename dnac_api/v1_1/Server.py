@@ -25,13 +25,13 @@ class ServerAPI(DNAServer):
 
     @property
     def available_namespaces(self):
-        url = '{}/file/namespace'.format(self.base_url)
+        url = '/file/namespace'
         return self.response_handler(self.get_handler(url))
 
     def files_under_namespace(self, namespace):
-        url = '{}/file/namespace/{}'.format(self.base_url, namespace)
+        url = '/file/namespace/{}'.format(namespace)
         return self.response_handler(self.get_handler(url))
 
     def file_checksum_by_field(self, field):
-        url = '{}/file/{}/checksum'.format(self.base_url, field)
+        url = '/file/{}/checksum'.format(field)
         return self.response_handler(self.get_handler(url))

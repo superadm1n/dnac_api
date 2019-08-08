@@ -26,7 +26,7 @@ class GlobalCredentials(DNAServer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.url = '{}/global-credential'.format(self.base_url)
+        self.url = '/global-credential'
 
     def credential_sub_type(self, credential_id):
         '''Returns the credential Sub Type given the ID of a credential'''
@@ -84,22 +84,22 @@ class Discoveries(DNAServer):
 
     @property
     def number_of_discoveries(self):
-        url = '{}/discovery/count'.format(self.base_url)
+        url = '/discovery/count'
         return self.get_handler(url).json()['response']
 
     def discovery_by_id(self, id):
         '''Untested'''
-        url = '{}/discovery/{}'.format(self.base_url, id)
+        url = '/discovery/{}'.format(id)
         return self.response_handler(self.get_handler(url))
 
     def discovery_jobs_for_ip(self, ip):
         '''Untested'''
-        url = '{}/discovery/job'.format(self.base_url)
+        url = '/discovery/job'
         response = self.get_handler(url, params={'ipAddress': ip})
         return self.response_handler(response)
 
     def physical_topology(self):
-        url = '{}/topology/physical-topology'.format(self.base_url)
+        url = '/topology/physical-topology'
         return self.get_handler(url)
 
 
