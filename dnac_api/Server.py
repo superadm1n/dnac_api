@@ -21,6 +21,11 @@ from requests.auth import HTTPBasicAuth
 
 
 class RequestHandler:
+    """
+    This class is a wrapper for the requests api. It buys us the ability in the future to utilize a different
+    package to handle the requests if it is decided. It also allows us to test the DNAServer class via
+    dependency injection
+    """
 
     def request(self, method, url, **kwargs):
         return requests.request(method, url, **kwargs)
@@ -39,6 +44,10 @@ class RequestHandler:
 
 
 class DNAServer(RequestHandler):
+    """
+    This class handles interfacing the api level of the package with the handling of the requests to the DNA server.
+    It provides a standard way for the rest of the package to send data to the DNA Center server.
+    """
 
     def __init__(self, dna_server, username, password, verify=False):
         self.dna_server = dna_server
@@ -50,11 +59,26 @@ class DNAServer(RequestHandler):
         self.session_token = self._login()
 
     def _login(self):
+        """Logs into the DNA Center server, returning the token that can be used for all subsequent
+        requests in the session
+
+        :return:
+        """
         url = "https://{}/api/system/v1/auth/token".format(self.dna_server)
         response = self.request("POST", url, auth=HTTPBasicAuth(self.username, self.password), verify=False)
         return response.json()["Token"]
 
     def get_handler(self, url, custom_headers=None, params=None):
+        """Handles sending a get request to the DNA Center Server
+
+        :param url: Relative URL location of the DNA Center REST API ex. /discovery/count
+        :type url: str
+        :param custom_headers: Custom headers to send in the get request
+        :type custom_headers: dict
+        :param params: Custom URL parameters to send in the get request
+        :type params: dict
+        :return: raw response from the DNAC server. Currently passes up the object that is given from the requests package
+        """
         headers = {}
         string_paramenters = {}
         if custom_headers:
@@ -69,6 +93,15 @@ class DNAServer(RequestHandler):
         return response
 
     def post_handler(self, url, data, custom_headers=None):
+        """Handles sending a post request to the DNA Center Server
+
+        :param url: Relative URL location of the DNA Center REST API ex. /discover/count
+        :type url: str
+        :param data: Data to send along with the post request
+        :param custom_headers: Custom headers to send in the post reqeuest
+        :type custom_headers:dict
+        :return:
+        """
         headers = {}
         if custom_headers:
             for key, value in custom_headers.items():
@@ -78,4 +111,10 @@ class DNAServer(RequestHandler):
         return self.post('{}{}'.format(self.base_url, url), data=data, headers=headers)
 
     def response_handler(self, response):
+        """Extracts the data that was sent back from the server. Not sure if I will keep this in as it
+        depends on the requests library and I might add extra pre processing of the data returned from the server.
+
+        :param response:
+        :return:
+        """
         return response.json()['response']
