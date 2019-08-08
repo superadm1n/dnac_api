@@ -75,7 +75,7 @@ class DNAServer(RequestHandler):
                 headers[key] = value
         headers["x-auth-token"] = self.session_token
 
-        return self.post(url, data=data, headers=custom_headers)
+        return self.post('{}{}'.format(self.base_url, url), data=data, headers=headers)
 
     def response_handler(self, response):
         return response.json()['response']
