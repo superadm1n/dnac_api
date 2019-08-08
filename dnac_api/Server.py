@@ -80,16 +80,12 @@ class DNAServer(RequestHandler):
         :return: raw response from the DNAC server. Currently passes up the object that is given from the requests package
         """
         headers = {}
-        string_paramenters = {}
         if custom_headers:
             for key, value in custom_headers.items():
                 headers[key] = value
-        if params:
-            for key, value in params.items():
-                string_paramenters[key] = value
-
         headers["x-auth-token"] = self.session_token
-        response = self.get('{}{}'.format(self.base_url, url), headers=headers, params=string_paramenters, verify=self.verify)
+
+        response = self.get('{}{}'.format(self.base_url, url), headers=headers, params=params, verify=self.verify)
         return response
 
     def post_handler(self, url, data, custom_headers=None):
