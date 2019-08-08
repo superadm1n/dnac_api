@@ -98,6 +98,14 @@ class Discoveries(DNAServer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    def _handle_kwargs(self, params, allowed_kwargs, **kwargs):
+        if kwargs:
+            for key, value, in kwargs.items():
+                if key not in allowed_kwargs:
+                    raise KeyError('URL parameter {} not allowed, please use one of the following {}'.format(key, ', '.join(allowed_kwargs)))
+                params[key] = value
+        return params
+
     @property
     def number_of_discoveries(self):
         url = '/discovery/count'
@@ -108,9 +116,16 @@ class Discoveries(DNAServer):
         url = '/discovery/{}'.format(id)
         return self.response_handler(self.get_handler(url))
 
+    def discovery_jobs_by_id(self, id, **kwargs):
+        allowed_kwargs = ['offset', 'limit', 'ipAddress']
+        url = '/discover/{}/job'.format(id)
+        url_params = self._handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
+        return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
+
+
     def discovery_jobs_for_ip(self, ip, **kwargs):
         '''Untested'''
-        allowed_kwargs = ['offset, limit, name']
+        allowed_kwargs = ['offset', 'limit', 'name']
         url = '/discovery/job'
         url_params = {'ipAddress': ip}
         # append additional paramenters
