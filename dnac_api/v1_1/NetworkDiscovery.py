@@ -143,6 +143,10 @@ class Discoveries(DNAServer):
         response = self.get_handler(url, params=url_params)
         return self.response_handler(response)
 
+    def num_network_devices_in_discovery(self, discovery_id):
+        url = '/discovery/{}/network-device/count'.format(discovery_id)
+        return self.response_handler(self.get_handler(url))
+
     def physical_topology(self):
         url = '/topology/physical-topology'
         return self.get_handler(url)
