@@ -20,21 +20,38 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 
-class DNAServer:
+class RequestHandler:
+
+    def request(self, method, url, **kwargs):
+        return requests.request(method, url, **kwargs)
+
+    def get(self, url, params=None, **kwargs):
+        return requests.get(url, params, **kwargs)
+
+    def post(self, url, data, json=None, **kwargs):
+        return requests.post(url, data, json, **kwargs)
+
+    def put(self, url, data, **kwargs):
+        return requests.put(url, data, **kwargs)
+
+    def delete(self, url, **kwargs):
+        return requests.delete(url, **kwargs)
+
+
+class DNAServer(RequestHandler):
 
     def __init__(self, dna_server, username, password, verify=False):
         self.dna_server = dna_server
         self.username = username
         self.password = password
-        self.base_url = 'https://{}/api/v1'.format(self.dna_server)
-        #self.base_url = 'https://{}/api/system/v1'.format(dna_server)
         self.verify = verify
+        self.base_url = 'https://{}/api/v1'.format(self.dna_server)
 
         self.session_token = self._login()
 
     def _login(self):
         url = "https://{}/api/system/v1/auth/token".format(self.dna_server)
-        response = requests.request("POST", url, auth=HTTPBasicAuth(self.username, self.password), verify=False)
+        response = self.request("POST", url, auth=HTTPBasicAuth(self.username, self.password), verify=False)
         return response.json()["Token"]
 
     def get_handler(self, url, custom_headers=None, params=None):
@@ -48,7 +65,7 @@ class DNAServer:
                 string_paramenters[key] = value
 
         headers["x-auth-token"] = self.session_token
-        response = requests.get(url, headers=headers, params=string_paramenters, verify=self.verify)
+        response = self.get('{}{}'.format(self.base_url, url), headers=headers, params=string_paramenters, verify=self.verify)
         return response
 
     def post_handler(self, url, data, custom_headers=None):
@@ -58,7 +75,7 @@ class DNAServer:
                 headers[key] = value
         headers["x-auth-token"] = self.session_token
 
-        return requests.post(url, data=data, headers=custom_headers)
+        return self.post(url, data=data, headers=custom_headers)
 
     def response_handler(self, response):
         return response.json()['response']
