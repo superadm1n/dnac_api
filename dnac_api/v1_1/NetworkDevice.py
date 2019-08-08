@@ -27,13 +27,12 @@ class NetworkDevice(DNAServer):
         url = '/network-device/count'
         return self.response_handler(self.get_handler(url))
 
-    @property
     def network_devices(self, id=None):
         url = '/network-device'
         return self.response_handler(self.get_handler(url, params={'id': id} if id else None))
 
     def network_device_by_ip(self, ip):
-        url = '/network-device/ip-address/{}'.format( ip)
+        url = '/network-device/ip-address/{}'.format(ip)
         return self.response_handler(self.get_handler(url))
 
     def network_device_by_serial_number(self, device_serial_number):
@@ -52,7 +51,7 @@ class NetworkDevice(DNAServer):
 class Modules(DNAServer):
 
     def modules_in_device(self, device_id, **kwargs):
-        allowed_kwargs = ['limit', 'offset', 'nameList', 'vendorEquipmentTypeList', 'partNumberList', 'operationalStateCodeList']
+        allowed_kwargs = ['limit', 'offset', 'nameList', 'vendorEquipmentTypeList', 'partNumberList', 'operationalStateCodeList', 'deviceId']
         url = '/network-device/module'
         params = {'deviceId': device_id}
         params = handle_kwargs(params, allowed_kwargs=allowed_kwargs, **kwargs)
