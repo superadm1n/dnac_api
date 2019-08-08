@@ -28,6 +28,7 @@ class GlobalCredentials(DNAServer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.url = '/global-credential'
+        self.allowed_kwargs = ['credentialSubType', 'sortBy', 'order']
 
     def credential_sub_type(self, credential_id):
         '''Returns the credential Sub Type given the ID of a credential'''
@@ -35,61 +36,45 @@ class GlobalCredentials(DNAServer):
         response = self.get_handler(url)
         return self.response_handler(response)
 
-    def _handle_header_kwargs(self, url_params, **kwargs):
-        allowed_kwargs = ['sortBy', 'order']
-        if kwargs:
-            for key, value in kwargs.items():
-                if key not in allowed_kwargs:
-                    raise KeyError('{} is not an allowed key word argument! Only the following key word arguments are allowed {}'.format(key, ','.join(allowed_kwargs)))
-                url_params[key] = value
-        return url_params
-
-    @property
     def cli(self, **kwargs):
         url_params = {'credentialSubType': 'CLI'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
-    @property
     def snmpv2_read(self, **kwargs):
         url_params = {'credentialSubType': 'SNMPV2_READ_COMMUNITY'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
-    @property
     def snmpv2_write(self, **kwargs):
         url_params = {'credentialSubType': 'SNMPV2_WRITE_COMMUNITY'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
-    @property
     def snmpv3(self, **kwargs):
         url_params = {'credentialSubType': 'SNMPV3'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
-    @property
     def http_write(self, **kwargs):
         url_params = {'credentialSubType': 'HTTP_WRITE'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
-    @property
     def http_read(self, **kwargs):
         url_params = {'credentialSubType': 'HTTP_READ'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
-    @property
     def netconf(self, **kwargs):
         url_params = {'credentialSubType': 'NETCONF'}
-        url_params = self._handle_header_kwargs(url_params, **kwargs)
+        url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
@@ -98,7 +83,6 @@ class Discoveries(DNAServer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
 
     @property
     def number_of_discoveries(self):
