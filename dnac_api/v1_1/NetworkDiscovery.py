@@ -87,7 +87,7 @@ class Discoveries(DNAServer):
     @property
     def number_of_discoveries(self):
         url = '/discovery/count'
-        return self.get_handler(url).json()['response']
+        return self.response_handler(self.get_handler(url))
 
     def discovery_by_id(self, discovery_id):
         '''Untested'''
