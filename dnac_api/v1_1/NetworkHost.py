@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from dnac_api.Server import DNAServer
+from dnac_api.lib.kwarg_hander import handle_kwargs
 
 
 class NetworkHost(DNAServer):
@@ -43,13 +44,19 @@ class NetworkHost(DNAServer):
         hostDeviceType	hostDeviceType	query	List
         subType	Available values: 'UNKNOWN' or 'IP_PHONE' or 'TELEPRESENCE' or 'VIDEO_SURVEILLANCE_IP_CAMERA' or 'VIDEO_ENDPOINT'. Only exact match filtering supported on this field
         '''
-        return self.response_handler(self.get_handler(url=self.url, params=kwargs))
+        allowed_kwargs = ['limit', 'offset', 'sortBy', 'order', 'hostName', 'hostMac', 'hostType', 'connectedInterfaceName', 'hostIp',
+                          'connectedNetworkDeviceIpAddress', 'connectedNetworkDeviceName', 'hostDeviceType', 'subType']
+        params = handle_kwargs({}, allowed_kwargs=allowed_kwargs, **kwargs)
+        return self.response_handler(self.get_handler(url='/host', params=params))
 
     @property
-    def num_of_hosts(self):
-        url = '{}/count'.format(self.url)
-        return self.response_handler(self.get_handler(url))
+    def num_of_hosts(self, **kwargs):
+        allowed_kwargs = ['hostName', 'hostMac', 'hostType', 'connectedInterfaceName', 'hostIp', 'connectedNetworkDeviceIpAddress',
+                          'connectedNetworkDeviceName', 'hostDeviceType', 'subType']
+        url = '/host/count'
+        params = handle_kwargs({}, allowed_kwargs=allowed_kwargs, **kwargs)
+        return self.response_handler(self.get_handler(url, params=params))
 
     def host_by_id(self, id):
-        url = '/{}'.format(id)
+        url = '/host/{}'.format(id)
         return self.response_handler(self.get_handler(url))
