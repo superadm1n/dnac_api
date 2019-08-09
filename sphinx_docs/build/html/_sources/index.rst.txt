@@ -5,11 +5,15 @@
 
 Welcome to dnac_api's documentation!
 ====================================
+.. note::
+   Documentation is in its infancy and is not complete at this time, keep this in mind!
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   project_goal
+   install
    version1_1
 
 

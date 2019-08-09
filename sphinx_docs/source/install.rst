@@ -1,0 +1,9 @@
+Installation Instructions
+=========================
+
+As of now the project has not been put on PyPi but will be in the future.
+
+To install the project as of now download the project to you computer and install
+by running the setup.py file
+
+```python setup.py install```

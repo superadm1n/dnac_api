@@ -29,20 +29,21 @@ class NetworkHost(DNAServer):
 
     def hosts_by_filter(self, **kwargs):
         '''
-        Parameter	        Description	                   Parameter_Type	DataType
-        limit	            limit	                       query	        string
-        offset    	        offset	                       query	        string
-        sortBy    	        sortBy	                       query	        string
-        order    	        order	                       query	        string
-        hostName	        hostName	                   query	        List
-        hostMac  	        hostMac  	                   query	        List
-        hostType	        Host type : wired or wireless  query	        List
-        connectedInterfaceName	connectedInterfaceName	   query	        List
-        hostIp	            hostIp	                       query	        List
-        connectedNetworkDeviceIpAddress	connectedNetworkDeviceIpAddress	query	List
-        connectedNetworkDeviceName	connectedNetworkDeviceName	query	List
-        hostDeviceType	hostDeviceType	query	List
-        subType	Available values: 'UNKNOWN' or 'IP_PHONE' or 'TELEPRESENCE' or 'VIDEO_SURVEILLANCE_IP_CAMERA' or 'VIDEO_ENDPOINT'. Only exact match filtering supported on this field
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *limit* (``str``)
+            * *offset* (``str``)
+            * *sortBy* (``str``)
+            * *order* (``str``)
+            * *hostName* (``str``)
+            * *hostMac* (``str``)
+            * *hostType* (``str``)
+            * *connectedInterfaceName* (``str``)
+            * *hostIp* (``str``)
+            * *connectedNetworkDeviceIpAddress* (``str``)
+            * *connectedNetworkDeviceName* (``str``)
+            * *hostDeviceType* (``str``)
+            * *subType* (``str``)	Available values: 'UNKNOWN' or 'IP_PHONE' or 'TELEPRESENCE' or 'VIDEO_SURVEILLANCE_IP_CAMERA' or 'VIDEO_ENDPOINT'. Only exact match filtering supported on this field
         '''
         allowed_kwargs = ['limit', 'offset', 'sortBy', 'order', 'hostName', 'hostMac', 'hostType', 'connectedInterfaceName', 'hostIp',
                           'connectedNetworkDeviceIpAddress', 'connectedNetworkDeviceName', 'hostDeviceType', 'subType']

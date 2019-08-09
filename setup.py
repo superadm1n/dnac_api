@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 from setuptools import setup
+from dnac_api import __version__
 
 description = '''Intuitive and easy to use Python SDK for the Cisco DNA Center Rest API that integrates with all major versions
 of the DNA Center REST API.'''
 
 setup(
     name='dnac_api',
-    version='0.0.1',
+    version=__version__,
     packages=['dnac_api'],
     keywords='dnac_api Cisco DNA Center',
     url='https://github.com/superadm1n/dnac_api',

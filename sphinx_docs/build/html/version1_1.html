@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to dnac_api’s documentation!" href="index.html" />
+    <link rel="prev" title="Installation Instructions" href="install.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,7 +34,10 @@
   <div class="section" id="version-1-1">
 <h1>Version 1.1<a class="headerlink" href="#version-1-1" title="Permalink to this headline">¶</a></h1>
 <p>Documentation for Version 1.1 of the DNA Center API</p>
-<dl class="class">
+<div class="section" id="network-discovery">
+<h2>Network Discovery<a class="headerlink" href="#network-discovery" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="class">
 <dt id="dnac_api.v1_1.NetworkDiscovery">
 <em class="property">class </em><code class="sig-prename descclassname">dnac_api.v1_1.</code><code class="sig-name descname">NetworkDiscovery</code><span class="sig-paren">(</span><em class="sig-param">dna_server</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">verify=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery" title="Permalink to this definition">¶</a></dt>
 <dd><p>API to the Network Discovery section of the Cisco DNA Center REST API
@@ -303,7 +306,12 @@ the api route <code class="docutils literal notranslate"><span class="pre">/glob
 
 </dd></dl>
 
-<dl class="class">
+</div></blockquote>
+</div>
+<div class="section" id="network-device">
+<h2>Network Device<a class="headerlink" href="#network-device" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="class">
 <dt id="dnac_api.v1_1.NetworkDevice">
 <em class="property">class </em><code class="sig-prename descclassname">dnac_api.v1_1.</code><code class="sig-name descname">NetworkDevice</code><span class="sig-paren">(</span><em class="sig-param">dna_server</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">verify=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDevice" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
@@ -374,7 +382,12 @@ the api route <code class="docutils literal notranslate"><span class="pre">/glob
 
 </dd></dl>
 
-<dl class="class">
+</div></blockquote>
+</div>
+<div class="section" id="network-host">
+<h2>Network Host<a class="headerlink" href="#network-host" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="class">
 <dt id="dnac_api.v1_1.NetworkHost">
 <em class="property">class </em><code class="sig-prename descclassname">dnac_api.v1_1.</code><code class="sig-name descname">NetworkHost</code><span class="sig-paren">(</span><em class="sig-param">dna_server</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">verify=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkHost" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
@@ -385,20 +398,28 @@ the api route <code class="docutils literal notranslate"><span class="pre">/glob
 <dl class="method">
 <dt id="dnac_api.v1_1.NetworkHost.hosts_by_filter">
 <code class="sig-name descname">hosts_by_filter</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkHost.hosts_by_filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameter               Description                        Parameter_Type       DataType
-limit               limit                              query            string
-offset                  offset                         query            string
-sortBy                  sortBy                         query            string
-order                   order                          query            string
-hostName                hostName                           query                List
-hostMac                 hostMac                            query                List
-hostType                Host type : wired or wireless  query            List
-connectedInterfaceName  connectedInterfaceName     query                List
-hostIp              hostIp                             query            List
-connectedNetworkDeviceIpAddress connectedNetworkDeviceIpAddress query   List
-connectedNetworkDeviceName      connectedNetworkDeviceName      query   List
-hostDeviceType  hostDeviceType  query   List
-subType Available values: ‘UNKNOWN’ or ‘IP_PHONE’ or ‘TELEPRESENCE’ or ‘VIDEO_SURVEILLANCE_IP_CAMERA’ or ‘VIDEO_ENDPOINT’. Only exact match filtering supported on this field</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> – See Keyword Arguments below for available keyword arguments.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><em>limit</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>offset</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>sortBy</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>order</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>hostName</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>hostMac</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>hostType</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>connectedInterfaceName</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>hostIp</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>connectedNetworkDeviceIpAddress</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>connectedNetworkDeviceName</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>hostDeviceType</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>subType</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)       Available values: ‘UNKNOWN’ or ‘IP_PHONE’ or ‘TELEPRESENCE’ or ‘VIDEO_SURVEILLANCE_IP_CAMERA’ or ‘VIDEO_ENDPOINT’. Only exact match filtering supported on this field</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -408,7 +429,12 @@ subType Available values: ‘UNKNOWN’ or ‘IP_PHONE’ or ‘TELEPRESENCE’ 
 
 </dd></dl>
 
-<dl class="class">
+</div></blockquote>
+</div>
+<div class="section" id="system">
+<h2>System<a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="class">
 <dt id="dnac_api.v1_1.System">
 <em class="property">class </em><code class="sig-prename descclassname">dnac_api.v1_1.</code><code class="sig-name descname">System</code><span class="sig-paren">(</span><em class="sig-param">dna_server</em>, <em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">verify=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.System" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
@@ -428,6 +454,8 @@ subType Available values: ‘UNKNOWN’ or ‘IP_PHONE’ or ‘TELEPRESENCE’ 
 
 </dd></dl>
 
+</div></blockquote>
+</div>
 </div>
 
 
@@ -449,14 +477,22 @@ subType Available values: ‘UNKNOWN’ or ‘IP_PHONE’ or ‘TELEPRESENCE’ 
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Version 1.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_goal.html">Project Goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation Instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Version 1.1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#network-discovery">Network Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-device">Network Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-host">Network Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system">System</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to dnac_api’s documentation!</a></li>
+      <li>Previous: <a href="install.html" title="previous chapter">Installation Instructions</a></li>
   </ul></li>
 </ul>
 </div>
