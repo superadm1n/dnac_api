@@ -24,6 +24,7 @@ author = 'Kyle Kowalczyk'
 
 # The full version, including alpha/beta/rc tags
 release = __version__
+master_doc = 'index'
 
 
 # -- General configuration ---------------------------------------------------
