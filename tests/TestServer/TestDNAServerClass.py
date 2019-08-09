@@ -19,7 +19,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from unittest import TestCase
 import random
-from dnac_api.Server import RequestHandler, DNAServer
+from dnac_api.Server import DNAServer
+from dnac_api.RequestHandler import ResponseObject, RequestHandler
 
 
 class ControlledRequestHandler(RequestHandler):
@@ -59,7 +60,7 @@ class ControlledRequestHandler(RequestHandler):
         class ReturnObj:
             def json(self):
                 return {'Token': 'JunkToken'}
-        return ReturnObj()
+        return ResponseObject(response_data={'Token': 'JunkToken'}, status_code=200)
 
 
 class TestableDNAServer(DNAServer, ControlledRequestHandler):
@@ -128,8 +129,5 @@ class TestResponseHandler(TestCase):
         self.instance = TestableDNAServer('host', 'user', 'password')
 
     def test_basic_test(self):
-        class ReturnObj:
-            def json(self):
-                return {'response': 'JunkResponse'}
-        return_obj = ReturnObj()
-        self.assertEqual(self.instance.response_handler(return_obj), 'JunkResponse')
+        return_obj = ResponseObject(status_code=200, response_data='JunkResponse')
+        self.assertEqual('JunkResponse', self.instance.response_handler(return_obj))

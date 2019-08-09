@@ -16,31 +16,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-import requests
 from requests.auth import HTTPBasicAuth
-
-
-class RequestHandler:
-    """
-    This class is a wrapper for the requests api. It buys us the ability in the future to utilize a different
-    package to handle the requests if it is decided. It also allows us to test the DNAServer class via
-    dependency injection
-    """
-
-    def request(self, method, url, **kwargs):
-        return requests.request(method, url, **kwargs)
-
-    def get(self, url, params=None, **kwargs):
-        return requests.get(url, params, **kwargs)
-
-    def post(self, url, data, json=None, **kwargs):
-        return requests.post(url, data, json, **kwargs)
-
-    def put(self, url, data, **kwargs):
-        return requests.put(url, data, **kwargs)
-
-    def delete(self, url, **kwargs):
-        return requests.delete(url, **kwargs)
+from dnac_api.RequestHandler import RequestHandler
 
 
 class DNAServer(RequestHandler):
@@ -66,7 +43,7 @@ class DNAServer(RequestHandler):
         """
         url = "https://{}/api/system/v1/auth/token".format(self.dna_server)
         response = self.request("POST", url, auth=HTTPBasicAuth(self.username, self.password), verify=False)
-        return response.json()["Token"]
+        return response.response_data["Token"]
 
     def get_handler(self, url, custom_headers=None, params=None):
         """Handles sending a get request to the DNA Center Server
@@ -113,4 +90,4 @@ class DNAServer(RequestHandler):
         :param response:
         :return:
         """
-        return response.json()['response']
+        return response.response_data
