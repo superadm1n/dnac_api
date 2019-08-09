@@ -20,8 +20,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 This file imports each of the sections of the v1.1 Cisco DNA Center
 API so each object is presented to the user with its proper name.
 """
-from dnac_api.v1_1.NetworkDevice import API as NetworkDevice
-from dnac_api.v1_1.NetworkDiscovery import API as NetworkDiscovery
+from dnac_api.v1_1.NetworkDevice import NetworkDevice
+from dnac_api.v1_1.NetworkDiscovery import NetworkDiscovery
 from dnac_api.v1_1.NetworkHost import NetworkHost
-from dnac_api.v1_1.SWIM import SWIMAPI as SWIM
-from dnac_api.v1_1.System import SystemAPI as System
+from dnac_api.v1_1.SWIM import SWIM
+from dnac_api.v1_1.System import System

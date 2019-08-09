@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from dnac_api.Server import DNAServer
 
-class SWIMAPI(DNAServer):
+class SWIM(DNAServer):
 
     # TODO: Add Post and Delete routes to API.
 

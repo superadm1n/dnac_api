@@ -31,48 +31,108 @@ class GlobalCredentials(DNAServer):
         self.allowed_kwargs = ['credentialSubType', 'sortBy', 'order']
 
     def credential_sub_type(self, credential_id):
-        '''Returns the credential Sub Type given the ID of a credential'''
+        '''This method is used to get global credential for the given credential sub type
+
+        :param credential_id: Credential type as CLI / SNMPV2_READ_COMMUNITY / SNMPV2_WRITE_COMMUNITY / SNMPV3 / HTTP_WRITE / HTTP_READ / NETCONF
+        :return:
+        '''
         url = '{}/{}'.format(self.url, credential_id)
         response = self.get_handler(url)
         return self.response_handler(response)
 
     def cli(self, **kwargs):
+        """This method is used to get global CLI credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global CLI Credentials
+        """
         url_params = {'credentialSubType': 'CLI'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
     def snmpv2_read(self, **kwargs):
+        """This method is used to get global SNMPv2 Read credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global SNMPv2 Read Credentials
+        """
         url_params = {'credentialSubType': 'SNMPV2_READ_COMMUNITY'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
     def snmpv2_write(self, **kwargs):
+        """This method is used to get global SNMPv2 Write credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global SNMPv2 Write Credentials
+        """
         url_params = {'credentialSubType': 'SNMPV2_WRITE_COMMUNITY'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
     def snmpv3(self, **kwargs):
+        """This method is used to get global SNMPv3 credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global SNMPv3 Credentials
+        """
         url_params = {'credentialSubType': 'SNMPV3'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
     def http_write(self, **kwargs):
+        """This method is used to get global HTTP Write credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global HTTP Write Credentials
+        """
         url_params = {'credentialSubType': 'HTTP_WRITE'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
     def http_read(self, **kwargs):
+        """This method is used to get global HTTP Read credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global HTTP Read Credentials
+        """
         url_params = {'credentialSubType': 'HTTP_READ'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
     def netconf(self, **kwargs):
+        """This method is used to get global Netconf credentials
+
+        :param kwargs: See Keyword Arguments below for available keyword arguments.
+        :Keyword Arguments:
+            * *sortBy* (``str``) -- define sorting on the data returned
+            * *order* (``str``) -- Define order on data returned
+        :return: Global Netconf Credentials
+        """
         url_params = {'credentialSubType': 'NETCONF'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
@@ -107,7 +167,12 @@ class Discoveries(DNAServer):
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
     def discovery_jobs_for_ip(self, ip, **kwargs):
-        '''Untested'''
+        """
+
+        :param ip:
+        :param kwargs: See Keyword Arguments below
+        :return:
+        """
         allowed_kwargs = ['offset', 'limit', 'name']
         url = '/discovery/job'
         url_params = {'ipAddress': ip}
@@ -126,5 +191,5 @@ class Discoveries(DNAServer):
         return self.response_handler(self.get_handler(url))
 
 
-class API(GlobalCredentials, Discoveries):
+class NetworkDiscovery(GlobalCredentials, Discoveries):
     pass

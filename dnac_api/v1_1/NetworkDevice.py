@@ -20,7 +20,7 @@ from dnac_api.Server import DNAServer
 from dnac_api.lib.kwarg_hander import handle_kwargs
 
 
-class NetworkDevice(DNAServer):
+class DeviceOperations(DNAServer):
 
     @property
     def network_device_count(self):
@@ -73,6 +73,10 @@ class Locations(DNAServer):
 
     @property
     def devices_with_location(self):
+        '''My DOcumentation
+
+        :return:
+        '''
         url = '/network-device/location'
         return self.response_handler(self.get_handler(url))
 
@@ -85,5 +89,5 @@ class Locations(DNAServer):
         return self.response_handler(self.get_handler(url))
 
 
-class API(NetworkDevice, Locations, Modules):
+class NetworkDevice(DeviceOperations, Locations, Modules):
     pass
