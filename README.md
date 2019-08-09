@@ -6,6 +6,9 @@ This project aims to integrate all major versions of the DNA Center Rest API
 and provide a consistent, intuitive, and pythonic way of interfacing your script
 or application with the DNA Center API.
 
+## Documentation
+Documentation for this project can be found at [ReadTheDocs](https://dnac-api.readthedocs.io/en/latest/index.html)
+
 ## Installation
 
 ```sh
@@ -25,8 +28,6 @@ print(dnac.num_of_hosts)
 ```
 
 ## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
 
 ```sh
 git clone https://github.com/superadm1n/dnac_api
