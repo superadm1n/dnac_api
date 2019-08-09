@@ -41,7 +41,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def cli(self, **kwargs):
-        """This method is used to get global CLI credentials
+        """This method is used to get global CLI credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -55,7 +56,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def snmpv2_read(self, **kwargs):
-        """This method is used to get global SNMPv2 Read credentials
+        """This method is used to get global SNMPv2 Read credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -69,7 +71,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def snmpv2_write(self, **kwargs):
-        """This method is used to get global SNMPv2 Write credentials
+        """This method is used to get global SNMPv2 Write credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -83,7 +86,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def snmpv3(self, **kwargs):
-        """This method is used to get global SNMPv3 credentials
+        """This method is used to get global SNMPv3 credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -97,7 +101,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def http_write(self, **kwargs):
-        """This method is used to get global HTTP Write credentials
+        """This method is used to get global HTTP Write credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -111,7 +116,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def http_read(self, **kwargs):
-        """This method is used to get global HTTP Read credentials
+        """This method is used to get global HTTP Read credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -125,7 +131,8 @@ class GlobalCredentials(DNAServer):
         return self.response_handler(response)
 
     def netconf(self, **kwargs):
-        """This method is used to get global Netconf credentials
+        """This method is used to get global Netconf credentials. This method gets to
+        the api route ``/global-credential``
 
         :param kwargs: See Keyword Arguments below for available keyword arguments.
         :Keyword Arguments:
@@ -150,17 +157,50 @@ class Discoveries(DNAServer):
         return self.response_handler(self.get_handler(url))
 
     def discovery_by_id(self, discovery_id):
-        '''Untested'''
+        """Gets discovery by specified ID, sends a GET request to ``/discovery/{id}``
+
+        :param discovery_id:
+        :return:
+        """
         url = '/discovery/{}'.format(discovery_id)
         return self.response_handler(self.get_handler(url))
 
     def discovery_jobs_by_id(self, discovery_id, **kwargs):
+        """Returns discovery jobs by specified ID.
+
+        :param discovery_id:
+        :param kwargs: See Keyword Arguments below
+        :Keyword Arguments:
+            * *offset* (``str``)
+            * *limit* (``str``)
+            * *ipAddress* (``str``)
+        :return:
+        """
         allowed_kwargs = ['offset', 'limit', 'ipAddress']
         url = '/discover/{}/job'.format(discovery_id)
         url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
     def network_devices_from_discovery_by_filters(self, discovery_id, **kwargs):
+        """
+
+        :param discovery_id:
+        :param kwargs: See Keyword Arguments below
+        :Keyword Arguments:
+            * *offset* (``str``)
+            * *limit* (``str``)
+            * *ipAddress* (``str``)
+            * *taskId* (``str``)
+            * *sortyBy* (``str``)
+            * *sortOrder* (``str``)
+            * *ipAddress* (``str``)
+            * *pingStatus* (``str``)
+            * *snmpStatus* (``str``)
+            * *cliStatus* (``str``)
+            * *netconfStatus* (``str``)
+            * *httpStatus* (``str``)
+        :return:
+        """
         allowed_kwargs = ['taskId', 'sortyBy', 'sortOrder', 'ipAddress', 'pingStatus', 'snmpStatus', 'cliStatus', 'netconfStatus', 'httpStatus']
         url = '/discovery/{}/summary'.format(discovery_id)
         url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
@@ -192,4 +232,6 @@ class Discoveries(DNAServer):
 
 
 class NetworkDiscovery(GlobalCredentials, Discoveries):
+    """API to the Network Discovery section of the Cisco DNA Center REST API
+    Version 1.1. Info on raw API calls can be found at https://developer.cisco.com/site/dna-center-rest-api/?version=1.1"""
     pass

@@ -4,6 +4,10 @@ from tests.test_request_handler.testable_objects import TestableRequestHandler a
 
 
 class TestGet(TestCase):
+    """
+    Tests the get method and also serves as the base test to propegate each test
+    to the other methods below
+    """
 
     def setUp(self) -> None:
         t = RequestHandler()
