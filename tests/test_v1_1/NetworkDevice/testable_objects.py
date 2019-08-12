@@ -1,4 +1,4 @@
-from dnac_api.v1_1.NetworkDevice import API, Locations, Modules, NetworkDevice
+from dnac_api.v1_1.NetworkDevice import Locations, Modules, NetworkDevice
 from tests.test_v1_1.controlled_dna_server import ControlledDNAServer
 
 

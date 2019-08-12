@@ -36,7 +36,7 @@ class discovery_jobs_by_id(TestCase):
         self.execution_id = self.instance.discovery_jobs_by_id(self.passed_id)
 
     def test_passes_proper_url(self):
-        self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discover/{}/job'.format(self.passed_id))
+        self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/{}/job'.format(self.passed_id))
 
     def test_calls_response_handler(self):
         self.assertEqual(self.instance.response_handler_called, 1)

@@ -1,6 +1,7 @@
 from unittest import TestCase
 from dnac_api.RequestHandler import ResponseObject
 from tests.test_request_handler.testable_objects import TestableRequestHandler as RequestHandler
+from http import HTTPStatus
 
 
 class TestGet(TestCase):
@@ -21,6 +22,7 @@ class TestGet(TestCase):
 
     def test_extracts_status_code_properly(self):
         self.assertEqual(200, self.data.status_code)
+        self.assertEqual(HTTPStatus.OK, self.data.status_code)
 
 
 class TestPost(TestGet):

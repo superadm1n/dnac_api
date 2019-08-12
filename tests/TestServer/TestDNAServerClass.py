@@ -113,7 +113,7 @@ class TestPostHandler(TestCase):
 
     def test_passes_data_properly(self):
         id = self.instance.post_handler('/my/url', data='Junk')
-        self.assertEqual(self.instance.post_data_passed[id], 'Junk')
+        self.assertEqual('"Junk"', self.instance.post_data_passed[id])
 
     def test_includes_token_in_header(self):
         id = self.instance.post_handler('/my/url', data='Junk')
