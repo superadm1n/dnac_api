@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from requests.auth import HTTPBasicAuth
 from dnac_api.RequestHandler import RequestHandler
-
+import json
 
 class DNAServer(RequestHandler):
     """
@@ -27,6 +27,7 @@ class DNAServer(RequestHandler):
     """
 
     def __init__(self, dna_server, username, password, verify=False):
+        super().__init__()
         self.dna_server = dna_server
         self.username = username
         self.password = password
@@ -80,8 +81,25 @@ class DNAServer(RequestHandler):
             for key, value in custom_headers.items():
                 headers[key] = value
         headers["x-auth-token"] = self.session_token
+        headers['Content-Type'] = 'application/json'
 
-        return self.post('{}{}'.format(self.base_url, url), data=data, headers=headers)
+        return self.post('{}{}'.format(self.base_url, url), data=json.dumps(data), headers=headers)
+
+    def put_handler(self, url, data, custom_headers=None):
+        """
+
+        :param url:
+        :param data:
+        :param custom_headers:
+        :return:
+        """
+        headers = {}
+        if custom_headers:
+            for key, value in custom_headers.items():
+                headers[key] = value
+        headers["x-auth-token"] = self.session_token
+
+        return self.put('{}{}'.format(self.base_url, url), data=data, headers=headers)
 
     def response_handler(self, response):
         """Extracts the data that was sent back from the server. Not sure if I will keep this in as it
