@@ -44,3 +44,9 @@ class TestDelete(TestGet):
     def setUp(self) -> None:
         t = RequestHandler()
         self.data = t.delete('url')
+
+class TestRequest(TestGet):
+
+    def setUp(self) -> None:
+        t = RequestHandler()
+        self.data = t.request('url', 'POST')

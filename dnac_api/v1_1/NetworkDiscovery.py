@@ -95,7 +95,7 @@ class GlobalCredentials(DNAServer):
         :return:
         """
         data = {"readCommunity": community_string, "comments": comments, "description": description}
-        self.post_handler('/global-credential/snmpv2-read-community', data=[data])
+        return self.post_handler('/global-credential/snmpv2-read-community', data=[data])
 
     def snmpv2_write(self, **kwargs):
         """This method is used to get global SNMPv2 Write credentials. This method gets to
@@ -124,7 +124,7 @@ class GlobalCredentials(DNAServer):
         :return:
         """
         data = {"writeCommunity": community_string, "comments": comments, "description": description}
-        self.post_handler('/global-credential/snmpv2-write-community', data=[data])
+        return self.post_handler('/global-credential/snmpv2-write-community', data=[data])
 
     def snmpv3(self, **kwargs):
         """This method is used to get global SNMPv3 credentials. This method gets to
