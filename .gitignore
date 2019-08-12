@@ -1,3 +1,6 @@
 .idea/
 env/
 *.pyc
+.coverage
+htmlcov
+t.py
