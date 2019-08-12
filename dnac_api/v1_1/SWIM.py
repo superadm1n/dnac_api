@@ -22,6 +22,9 @@ class SWIM(DNAServer):
 
     # TODO: Add Post and Delete routes to API.
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def files_on_device(self, device_id):
         url = '/device-image/device/{}/file'.format(device_id)
         return self.response_handler(self.get_handler(url))

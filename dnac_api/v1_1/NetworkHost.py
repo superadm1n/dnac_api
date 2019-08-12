@@ -50,7 +50,6 @@ class NetworkHost(DNAServer):
         params = handle_kwargs({}, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url='/host', params=params))
 
-    @property
     def num_of_hosts(self, **kwargs):
         allowed_kwargs = ['hostName', 'hostMac', 'hostType', 'connectedInterfaceName', 'hostIp', 'connectedNetworkDeviceIpAddress',
                           'connectedNetworkDeviceName', 'hostDeviceType', 'subType']

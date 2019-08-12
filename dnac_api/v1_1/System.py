@@ -23,6 +23,9 @@ class System(DNAServer):
 
     # TODO: Add the Put, Post, and Delete routes to the API
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     @property
     def available_namespaces(self):
         url = '/file/namespace'
