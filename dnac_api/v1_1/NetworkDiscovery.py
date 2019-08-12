@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from dnac_api.Server import DNAServer
 from dnac_api.lib.kwarg_hander import handle_kwargs
+import json
 
 
 class GlobalCredentials(DNAServer):
@@ -55,6 +56,19 @@ class GlobalCredentials(DNAServer):
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
+    def create_cli_credentials(self, username, password, enable_password, comments,  description):
+        """Sends POST request to ``/global-credential/cli`` to create new cli credential entry.
+
+        :param username: Username used in the credentials
+        :param password: Password used in the credentials
+        :param enable_password: Enable password used in the credentials
+        :param comments: Brief Comment
+        :param description: Brief Description
+        :return:
+        """
+        data = {'username': username, 'password': password, 'enablePassword': enable_password, 'comments': comments, 'description': description}
+        return self.post_handler('/global-credential/cli', data=[data])
+
     def snmpv2_read(self, **kwargs):
         """This method is used to get global SNMPv2 Read credentials. This method gets to
         the api route ``/global-credential``
@@ -69,6 +83,20 @@ class GlobalCredentials(DNAServer):
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
+
+    def create_snmpv2_read(self, community_string, comments, description):
+        """Creates new SNMPv2 Read credentials by submitting a post request to ``/global-credential/snmpv2-read-community``
+
+        :param community_string: Community string
+        :type community_string: str
+        :param comments: Comments
+        :type comments: str
+        :param description: Descriptiomn
+        :type description: str
+        :return:
+        """
+        data = {"readCommunity": community_string, "comments": comments, "description": description}
+        self.post_handler('/global-credential/snmpv2-read-community', data=[data])
 
     def snmpv2_write(self, **kwargs):
         """This method is used to get global SNMPv2 Write credentials. This method gets to
@@ -85,6 +113,20 @@ class GlobalCredentials(DNAServer):
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
+    def create_snmpv2_write(self, community_string, comments, description):
+        """Creates new SNMPv2 Write credentials by submitting a post request to ``/global-credential/snmpv2-write-community``
+
+        :param community_string: Community string
+        :type community_string: str
+        :param comments: Comments
+        :type comments: str
+        :param description: Descriptiomn
+        :type description: str
+        :return:
+        """
+        data = {"writeCommunity": community_string, "comments": comments, "description": description}
+        self.post_handler('/global-credential/snmpv2-write-community', data=[data])
+
     def snmpv3(self, **kwargs):
         """This method is used to get global SNMPv3 credentials. This method gets to
         the api route ``/global-credential``
@@ -99,6 +141,24 @@ class GlobalCredentials(DNAServer):
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
+
+    def create_snmpv3_credentials(self, privacy_password, privacy_type, snmp_mode, auth_type, auth_password, username, comments, description):
+        """Creates new SNMPv3 credentials by submitting a post request to ``/global-credential/snmpv3``
+
+        :param privacy_password:
+        :param privacy_type:
+        :param snmp_mode:
+        :param auth_type:
+        :param auth_password:
+        :param username:
+        :param comments:
+        :param description:
+        :return:
+        """
+        data = {"privacyPassword": privacy_password, "privacyType": privacy_type, "snmpMode": snmp_mode, "authType":auth_type,
+                "authPassword": auth_password, "username": username, "comments": comments,  "description": description}
+
+        return self.post_handler('/global-credential/snmpv3', data=[data])
 
     def http_write(self, **kwargs):
         """This method is used to get global HTTP Write credentials. This method gets to
@@ -115,6 +175,29 @@ class GlobalCredentials(DNAServer):
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
+    def create_http_write_credentials(self, username, password, port, secure, comments, description):
+        """Creates new HTTP Write credentials by submitting a post request to ``/global-credential/http-write``
+
+        :param username:
+        :type username: str
+        :param password:
+        :type password: str
+        :param port:
+        :type port: int
+        :param secure:
+        :type secure: bool
+        :param comments:
+        :type comments: str
+        :param description:
+        :type description: str
+        :return:
+        :rtype: ResponseObject
+        """
+        data = {"port": port, "secure": secure, "username": username, "password": password, "comments": comments,
+                "description": description}
+        return self.post_handler('/global-credential/http-write', data=[data])
+
+
     def http_read(self, **kwargs):
         """This method is used to get global HTTP Read credentials. This method gets to
         the api route ``/global-credential``
@@ -129,6 +212,28 @@ class GlobalCredentials(DNAServer):
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
+
+    def create_http_read_credentials(self, username, password, port, secure, comments, description):
+        """Creates new HTTP Read credentials by submitting a post request to ``/global-credential/http-read``
+
+        :param username:
+        :type username: str
+        :param password:
+        :type password: str
+        :param port:
+        :type port: int
+        :param secure:
+        :type secure: bool
+        :param comments:
+        :type comments: str
+        :param description:
+        :type description: str
+        :return:
+        :rtype: ResponseObject
+        """
+        data = {"port": port, "secure": secure, "username": username, "password": password, "comments": comments,
+                "description": description}
+        return self.post_handler('/global-credential/http-read', data=[data])
 
     def netconf(self, **kwargs):
         """This method is used to get global Netconf credentials. This method gets to
@@ -145,6 +250,17 @@ class GlobalCredentials(DNAServer):
         response = self.get_handler(self.url, params=url_params)
         return self.response_handler(response)
 
+    def create_netconf_credentials(self, netconf_port, comments, description):
+        """Creates new netconf credentials by submitting a post request to ``/global-credential/netconf``
+
+        :param netconf_port:
+        :param comments:
+        :param description:
+        :return:
+        """
+        data = {"netconfPort": netconf_port, "comments": comments, "description": description}
+        return self.post_handler('/global-credential/netconf', data=[data])
+
 
 class Discoveries(DNAServer):
 
@@ -155,6 +271,70 @@ class Discoveries(DNAServer):
     def number_of_discoveries(self):
         url = '/discovery/count'
         return self.response_handler(self.get_handler(url))
+
+    def start_discovery_process(self, **kwargs):
+        """Initiates discovery with the given parameters
+
+        :param kwargs: See Keyword Arguments below
+        :Keyword Arguments:
+
+            * *snmpMode* (``str``)
+            * *netconfPort* (``str``)
+            * *preferredMgmtIPMethod* (``str``)
+            * *name* (``str``)
+            * *globalCredentialIdList*  (``list(str)``)
+            * *httpReadCredential*: (``dict``)
+                * *port* (``integer``)
+                * *secure* (``boolean``)
+                * *username* (``string``)
+                * *password* (``string``)
+                * *comments* (``string``)
+                * *credentialType* (``string``)
+                * *description* (``string``)
+                * *id* (``string``)
+                * *instanceUuid* (``string``)
+
+
+
+            * *httpWriteCredential*: (``dict``)
+                * *port* (``integer"``)
+                * *secure* (``boolean"``)
+                * *username* (``string"``)
+                * *password* (``string"``)
+                * *comments* (``string"``)
+                * *credentialType* (``string"``)
+                * *description* (``string"``)
+                * *id* (``string"``)
+                * *instanceUuid* (``string``)
+
+
+            * *parentDiscoveryId* (``str``)
+            * *snmpROCommunityDesc* (``str``)
+            * *snmpRWCommunityDesc* (``str``)
+            * *snmpUserName* (``str``)
+            * *timeout* (``int``)
+            * *snmpVersion* (``str``)
+            * *ipAddressList* (``str``)
+            * *cdpLevel* (``int``)
+            * *enablePasswordList*: (``list(string)``)
+            * *ipFilterList*: (``list(string)``)
+            * *passwordList*: (``list(string)``)
+            * *protocolOrder(``str``)
+            * *reDiscovery (``bool``)
+            * *retry (``int``)
+            * *snmpAuthPassphrase (``str``)
+            * *snmpAuthProtocol (``str``)
+            * *snmpPrivPassphrase (``str``)
+            * *snmpPrivProtocol (``str``)
+            * *snmpROCommunity (``str``)
+            * *snmpRWCommunity (``str``)
+            * *userNameList (``list(string)``)
+            * *discoveryType* (``str``)
+
+        :return:
+        """
+        url = '/discovery'
+        self.post_handler(url, kwargs)
 
     def discovery_by_id(self, discovery_id):
         """Gets discovery by specified ID, sends a GET request to ``/discovery/{id}``
@@ -177,7 +357,7 @@ class Discoveries(DNAServer):
         :return:
         """
         allowed_kwargs = ['offset', 'limit', 'ipAddress']
-        url = '/discover/{}/job'.format(discovery_id)
+        url = '/discovery/{}/job'.format(discovery_id)
         url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
