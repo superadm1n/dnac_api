@@ -24,7 +24,6 @@ import json
 
 class GlobalCredentials(DNAServer):
 
-    # TODO: add setters to update the values on the server. setters should handle both posts and puts depending on the data passed into the value
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -297,12 +296,12 @@ class Discoveries(DNAServer):
 
 
             * *httpWriteCredential*: (``dict``)
-                * *port* (``integer"``)
-                * *secure* (``boolean"``)
-                * *username* (``string"``)
-                * *password* (``string"``)
-                * *comments* (``string"``)
-                * *credentialType* (``string"``)
+                * *port* (``integer``)
+                * *secure* (``boolean``)
+                * *username* (``string``)
+                * *password* (``string``)
+                * *comments* (``string``)
+                * *credentialType* (``string``)
                 * *description* (``string"``)
                 * *id* (``string"``)
                 * *instanceUuid* (``string``)
@@ -319,16 +318,16 @@ class Discoveries(DNAServer):
             * *enablePasswordList*: (``list(string)``)
             * *ipFilterList*: (``list(string)``)
             * *passwordList*: (``list(string)``)
-            * *protocolOrder(``str``)
-            * *reDiscovery (``bool``)
-            * *retry (``int``)
-            * *snmpAuthPassphrase (``str``)
-            * *snmpAuthProtocol (``str``)
-            * *snmpPrivPassphrase (``str``)
-            * *snmpPrivProtocol (``str``)
-            * *snmpROCommunity (``str``)
-            * *snmpRWCommunity (``str``)
-            * *userNameList (``list(string)``)
+            * *protocolOrder* (``str``)
+            * *reDiscovery* (``bool``)
+            * *retry* (``int``)
+            * *snmpAuthPassphrase* (``str``)
+            * *snmpAuthProtocol* (``str``)
+            * *snmpPrivPassphrase* (``str``)
+            * *snmpPrivProtocol* (``str``)
+            * *snmpROCommunity* (``str``)
+            * *snmpRWCommunity* (``str``)
+            * *userNameList* (``list(string)``)
             * *discoveryType* (``str``)
 
         :return:
