@@ -64,6 +64,151 @@ the api route <code class="docutils literal notranslate"><span class="pre">/glob
 </dd></dl>
 
 <dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_cli_credentials">
+<code class="sig-name descname">create_cli_credentials</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">enable_password</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_cli_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends POST request to <code class="docutils literal notranslate"><span class="pre">/global-credential/cli</span></code> to create new cli credential entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – Username used in the credentials</p></li>
+<li><p><strong>password</strong> – Password used in the credentials</p></li>
+<li><p><strong>enable_password</strong> – Enable password used in the credentials</p></li>
+<li><p><strong>comments</strong> – Brief Comment</p></li>
+<li><p><strong>description</strong> – Brief Description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_http_read_credentials">
+<code class="sig-name descname">create_http_read_credentials</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">port</em>, <em class="sig-param">secure</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_http_read_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new HTTP Read credentials by submitting a post request to <code class="docutils literal notranslate"><span class="pre">/global-credential/http-read</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – </p></li>
+<li><p><strong>password</strong> (<em>str</em>) – </p></li>
+<li><p><strong>port</strong> (<em>int</em>) – </p></li>
+<li><p><strong>secure</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>comments</strong> (<em>str</em>) – </p></li>
+<li><p><strong>description</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ResponseObject</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_http_write_credentials">
+<code class="sig-name descname">create_http_write_credentials</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em>, <em class="sig-param">port</em>, <em class="sig-param">secure</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_http_write_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new HTTP Write credentials by submitting a post request to <code class="docutils literal notranslate"><span class="pre">/global-credential/http-write</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – </p></li>
+<li><p><strong>password</strong> (<em>str</em>) – </p></li>
+<li><p><strong>port</strong> (<em>int</em>) – </p></li>
+<li><p><strong>secure</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>comments</strong> (<em>str</em>) – </p></li>
+<li><p><strong>description</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ResponseObject</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_netconf_credentials">
+<code class="sig-name descname">create_netconf_credentials</code><span class="sig-paren">(</span><em class="sig-param">netconf_port</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_netconf_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new netconf credentials by submitting a post request to <code class="docutils literal notranslate"><span class="pre">/global-credential/netconf</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>netconf_port</strong> – </p></li>
+<li><p><strong>comments</strong> – </p></li>
+<li><p><strong>description</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_snmpv2_read">
+<code class="sig-name descname">create_snmpv2_read</code><span class="sig-paren">(</span><em class="sig-param">community_string</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_snmpv2_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new SNMPv2 Read credentials by submitting a post request to <code class="docutils literal notranslate"><span class="pre">/global-credential/snmpv2-read-community</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>community_string</strong> (<em>str</em>) – Community string</p></li>
+<li><p><strong>comments</strong> (<em>str</em>) – Comments</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Descriptiomn</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_snmpv2_write">
+<code class="sig-name descname">create_snmpv2_write</code><span class="sig-paren">(</span><em class="sig-param">community_string</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_snmpv2_write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new SNMPv2 Write credentials by submitting a post request to <code class="docutils literal notranslate"><span class="pre">/global-credential/snmpv2-write-community</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>community_string</strong> (<em>str</em>) – Community string</p></li>
+<li><p><strong>comments</strong> (<em>str</em>) – Comments</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Descriptiomn</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.create_snmpv3_credentials">
+<code class="sig-name descname">create_snmpv3_credentials</code><span class="sig-paren">(</span><em class="sig-param">privacy_password</em>, <em class="sig-param">privacy_type</em>, <em class="sig-param">snmp_mode</em>, <em class="sig-param">auth_type</em>, <em class="sig-param">auth_password</em>, <em class="sig-param">username</em>, <em class="sig-param">comments</em>, <em class="sig-param">description</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.create_snmpv3_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new SNMPv3 credentials by submitting a post request to <code class="docutils literal notranslate"><span class="pre">/global-credential/snmpv3</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>privacy_password</strong> – </p></li>
+<li><p><strong>privacy_type</strong> – </p></li>
+<li><p><strong>snmp_mode</strong> – </p></li>
+<li><p><strong>auth_type</strong> – </p></li>
+<li><p><strong>auth_password</strong> – </p></li>
+<li><p><strong>username</strong> – </p></li>
+<li><p><strong>comments</strong> – </p></li>
+<li><p><strong>description</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="dnac_api.v1_1.NetworkDiscovery.credential_sub_type">
 <code class="sig-name descname">credential_sub_type</code><span class="sig-paren">(</span><em class="sig-param">credential_id</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.credential_sub_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method is used to get global credential for the given credential sub type</p>
@@ -300,6 +445,81 @@ the api route <code class="docutils literal notranslate"><span class="pre">/glob
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Global SNMPv3 Credentials</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dnac_api.v1_1.NetworkDiscovery.start_discovery_process">
+<code class="sig-name descname">start_discovery_process</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#dnac_api.v1_1.NetworkDiscovery.start_discovery_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiates discovery with the given parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> – See Keyword Arguments below</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><em>snmpMode</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>netconfPort</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>preferredMgmtIPMethod</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>name</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>globalCredentialIdList</em>  (<code class="docutils literal notranslate"><span class="pre">list(str)</span></code>)</p></li>
+<li><dl class="simple">
+<dt><em>httpReadCredential</em>: (<code class="docutils literal notranslate"><span class="pre">dict</span></code>)</dt><dd><ul>
+<li><p><em>port</em> (<code class="docutils literal notranslate"><span class="pre">integer</span></code>)</p></li>
+<li><p><em>secure</em> (<code class="docutils literal notranslate"><span class="pre">boolean</span></code>)</p></li>
+<li><p><em>username</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>password</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>comments</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>credentialType</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>description</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>id</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>instanceUuid</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>httpWriteCredential</em>: (<code class="docutils literal notranslate"><span class="pre">dict</span></code>)</dt><dd><ul>
+<li><p><em>port</em> (<code class="docutils literal notranslate"><span class="pre">integer</span></code>)</p></li>
+<li><p><em>secure</em> (<code class="docutils literal notranslate"><span class="pre">boolean</span></code>)</p></li>
+<li><p><em>username</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>password</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>comments</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>credentialType</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+<li><p><em>description</em> (<code class="docutils literal notranslate"><span class="pre">string&quot;</span></code>)</p></li>
+<li><p><em>id</em> (<code class="docutils literal notranslate"><span class="pre">string&quot;</span></code>)</p></li>
+<li><p><em>instanceUuid</em> (<code class="docutils literal notranslate"><span class="pre">string</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>parentDiscoveryId</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>snmpROCommunityDesc</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>snmpRWCommunityDesc</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>snmpUserName</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>timeout</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>)</p></li>
+<li><p><em>snmpVersion</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>ipAddressList</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><em>cdpLevel</em> (<code class="docutils literal notranslate"><span class="pre">int</span></code>)</p></li>
+<li><p><em>enablePasswordList</em>: (<code class="docutils literal notranslate"><span class="pre">list(string)</span></code>)</p></li>
+<li><p><em>ipFilterList</em>: (<code class="docutils literal notranslate"><span class="pre">list(string)</span></code>)</p></li>
+<li><p><em>passwordList</em>: (<code class="docutils literal notranslate"><span class="pre">list(string)</span></code>)</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">*</span></a>protocolOrder(<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id3"><span class="problematic" id="id4">*</span></a>reDiscovery (<code class="docutils literal notranslate"><span class="pre">bool</span></code>)</p></li>
+<li><p><a href="#id5"><span class="problematic" id="id6">*</span></a>retry (<code class="docutils literal notranslate"><span class="pre">int</span></code>)</p></li>
+<li><p><a href="#id7"><span class="problematic" id="id8">*</span></a>snmpAuthPassphrase (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id9"><span class="problematic" id="id10">*</span></a>snmpAuthProtocol (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id11"><span class="problematic" id="id12">*</span></a>snmpPrivPassphrase (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id13"><span class="problematic" id="id14">*</span></a>snmpPrivProtocol (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id15"><span class="problematic" id="id16">*</span></a>snmpROCommunity (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id17"><span class="problematic" id="id18">*</span></a>snmpRWCommunity (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+<li><p><a href="#id19"><span class="problematic" id="id20">*</span></a>userNameList (<code class="docutils literal notranslate"><span class="pre">list(string)</span></code>)</p></li>
+<li><p><em>discoveryType</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
 </dd>
 </dl>
 </dd></dl>
