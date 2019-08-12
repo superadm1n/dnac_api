@@ -31,7 +31,10 @@ class RequestHandler:
         :param raw_data: Raw data as returned from the requests library
         :return: Request Object
         """
-        return ResponseObject(status_code=raw_data.status_code, response_data=raw_data.json())
+        try:
+            return ResponseObject(status_code=raw_data.status_code, response_data=raw_data.json()['response'])
+        except KeyError:
+            return ResponseObject(status_code=raw_data.status_code, response_data=raw_data.json())
 
     def request(self, method, url, **kwargs):
         return self._extract_data_from_raw(self._request(method, url, **kwargs))
