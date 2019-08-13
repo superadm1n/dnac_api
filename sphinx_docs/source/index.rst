@@ -5,8 +5,6 @@
 
 Welcome to dnac_api's documentation!
 ====================================
-.. note::
-   Documentation is in its infancy and is not complete at this time, keep this in mind!
 
 .. toctree::
    :maxdepth: 2
