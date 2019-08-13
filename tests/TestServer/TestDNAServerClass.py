@@ -35,6 +35,10 @@ class ControlledRequestHandler(RequestHandler):
         self.post_json_passed = {}
         self.post_kwargs_passed = {}
 
+        self.put_url_passed = {}
+        self.put_data_passed = {}
+        self.put_kwargs_passed = {}
+
     def get(self, url, params=None, **kwargs):
         id = random.randint(1, 9999999999999999999)
         self.get_params_passed[id] = params
@@ -51,7 +55,11 @@ class ControlledRequestHandler(RequestHandler):
         return id
 
     def put(self, url, data, **kwargs):
-        pass
+        id = random.randint(1, 9999999999999999999)
+        self.put_url_passed[id] = url
+        self.put_data_passed[id] = data
+        self.put_kwargs_passed[id] = kwargs
+        return id
 
     def delete(self, url, **kwargs):
         pass
@@ -131,3 +139,24 @@ class TestResponseHandler(TestCase):
     def test_basic_test(self):
         return_obj = ResponseObject(status_code=200, response_data='JunkResponse')
         self.assertEqual('JunkResponse', self.instance.response_handler(return_obj))
+
+
+class TestPutHandler(TestCase):
+    def setUp(self) -> None:
+        self.instance = TestableDNAServer('host', 'user', 'password')
+
+    def test_passes_url_properly(self):
+        id = self.instance.put_handler('/my/url', data='Junk')
+        self.assertEqual(self.instance.put_url_passed[id], 'https://host/api/v1/my/url')
+
+    def test_passes_data_properly(self):
+        id = self.instance.put_handler('/my/url', data='Junk')
+        self.assertEqual('Junk', self.instance.put_data_passed[id])
+
+    def test_includes_token_in_header(self):
+        id = self.instance.put_handler('/my/url', data='Junk')
+        self.assertEqual(self.instance.put_kwargs_passed[id]['headers']['x-auth-token'], 'JunkToken')
+
+    def test_passes_custom_headers_properly(self):
+        id = self.instance.put_handler('/my/url', data='Junk', custom_headers={'HeaderKey': 'HeaderValue'})
+        self.assertEqual(self.instance.put_kwargs_passed[id]['headers']['HeaderKey'], 'HeaderValue')
