@@ -28,13 +28,27 @@ class System(DNAServer):
 
     @property
     def available_namespaces(self):
+        """Lists available namespaces. Sends get request to ``/file/namespace``
+
+        :return:
+        """
         url = '/file/namespace'
         return self.response_handler(self.get_handler(url))
 
     def files_under_namespace(self, namespace):
+        """Gets files located under namespace. sends get request to ``/file/namespace/{namespace}``
+
+        :param namespace:
+        :return: Files
+        """
         url = '/file/namespace/{}'.format(namespace)
         return self.response_handler(self.get_handler(url))
 
     def file_checksum_by_field(self, field):
+        """Gets file checksum by field. Sends a get request to ``/file/{field}/checksum``
+
+        :param field:
+        :return: File checksum
+        """
         url = '/file/{}/checksum'.format(field)
         return self.response_handler(self.get_handler(url))

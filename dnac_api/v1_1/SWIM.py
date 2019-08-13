@@ -26,10 +26,20 @@ class SWIM(DNAServer):
         super().__init__(*args, **kwargs)
 
     def files_on_device(self, device_id):
+        """Returns the files location on device. Sends get request to ``/device-image/device/{device_id}/file``
+
+        :param device_id: ID of Network device
+        :return:
+        """
         url = '/device-image/device/{}/file'.format(device_id)
         return self.response_handler(self.get_handler(url))
 
     def file_systems_on_device(self, device_id):
+        """Gets the file systems configured on device. Sends a get request to ``/device-image/device/{id}/file-system``
+
+        :param device_id: ID of Network device
+        :return: File Systems
+        """
         url = '/device-image/device/{}/file-system'.format(device_id)
         return self.response_handler(self.get_handler(url))
 
