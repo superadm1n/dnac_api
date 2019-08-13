@@ -268,6 +268,10 @@ class Discoveries(DNAServer):
 
     @property
     def number_of_discoveries(self):
+        """Gets number of discoveries by sending a get request to ``/discovery/count``
+
+        :return:
+        """
         url = '/discovery/count'
         return self.response_handler(self.get_handler(url))
 
@@ -386,11 +390,15 @@ class Discoveries(DNAServer):
         return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
 
     def discovery_jobs_for_ip(self, ip, **kwargs):
-        """
+        """Return discovery jobs associated with an IP address
 
-        :param ip:
+        :param ip: IP address to get discovery jobs for.
         :param kwargs: See Keyword Arguments below
-        :return:
+        :Keyword Arguments:
+            * *offset* (``str``)
+            * *limit* (``str``)
+            * *name* (``str``)
+        :return: Discovery Jobs
         """
         allowed_kwargs = ['offset', 'limit', 'name']
         url = '/discovery/job'
@@ -402,10 +410,19 @@ class Discoveries(DNAServer):
         return self.response_handler(response)
 
     def num_network_devices_in_discovery(self, discovery_id):
+        """Get number of network devices in a discovery. Sends a post request to ``/discovery/{discovery-id}/network-device/count``
+
+        :param discovery_id: Discovery ID
+        :return: number of network devices in discovery
+        """
         url = '/discovery/{}/network-device/count'.format(discovery_id)
         return self.response_handler(self.get_handler(url))
 
     def physical_topology(self):
+        """Sends get request to ``/topology/physical-topology`` to get the physical topology data.
+
+        :return: Physical topology data
+        """
         url = '/topology/physical-topology'
         return self.response_handler(self.get_handler(url))
 
