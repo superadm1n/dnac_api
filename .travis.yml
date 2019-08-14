@@ -2,9 +2,11 @@
 
  install:
   - pip install -r requirements.txt
+  - pip install coveralls
 
  script:
   - coverage run --source dnac_api -m unittest discover tests
 
  after_success:
   - coverage report
+  - coveralls
