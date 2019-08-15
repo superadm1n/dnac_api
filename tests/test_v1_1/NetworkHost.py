@@ -1,5 +1,5 @@
 from unittest import TestCase
-from tests.test_v1_1.controlled_dna_server import ControlledDNAServer
+from tests.controlled_objects import ControlledDNAServer
 from dnac_api.v1_1.NetworkHost import NetworkHost
 
 

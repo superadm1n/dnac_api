@@ -18,57 +18,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from unittest import TestCase
-import random
 from dnac_api.Server import DNAServer
-from dnac_api.RequestHandler import ResponseObject, RequestHandler
-
-
-class ControlledRequestHandler(RequestHandler):
-
-    def __init__(self):
-        self.get_params_passed = {}
-        self.get_kwargs_passed = {}
-        self.get_url_passed = {}
-
-        self.post_url_passed = {}
-        self.post_data_passed = {}
-        self.post_json_passed = {}
-        self.post_kwargs_passed = {}
-
-        self.put_url_passed = {}
-        self.put_data_passed = {}
-        self.put_kwargs_passed = {}
-
-    def get(self, url, params=None, **kwargs):
-        id = random.randint(1, 9999999999999999999)
-        self.get_params_passed[id] = params
-        self.get_kwargs_passed[id] = kwargs
-        self.get_url_passed[id] = url
-        return id
-
-    def post(self, url, data, json=None, **kwargs):
-        id = random.randint(1, 9999999999999999999)
-        self.post_url_passed[id] = url
-        self.post_data_passed[id] = data
-        self.post_json_passed[id] = json
-        self.post_kwargs_passed[id] = kwargs
-        return id
-
-    def put(self, url, data, **kwargs):
-        id = random.randint(1, 9999999999999999999)
-        self.put_url_passed[id] = url
-        self.put_data_passed[id] = data
-        self.put_kwargs_passed[id] = kwargs
-        return id
-
-    def delete(self, url, **kwargs):
-        pass
-
-    def request(self, method, url, **kwargs):
-        class ReturnObj:
-            def json(self):
-                return {'Token': 'JunkToken'}
-        return ResponseObject(response_data={'Token': 'JunkToken'}, status_code=200)
+from tests.controlled_objects import ControlledRequestHandler
+from dnac_api.RequestHandler import ResponseObject
 
 
 class TestableDNAServer(DNAServer, ControlledRequestHandler):
