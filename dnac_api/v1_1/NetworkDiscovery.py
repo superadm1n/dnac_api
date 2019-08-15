@@ -17,9 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from dnac_api.Server import DNAServer
+from dnac_api.v1_1.v1_1_Server import DNAServer as DNAServer
 from dnac_api.lib.kwarg_hander import handle_kwargs
-import json
 
 
 class GlobalCredentials(DNAServer):
