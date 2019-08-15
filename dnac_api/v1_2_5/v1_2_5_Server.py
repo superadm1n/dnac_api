@@ -9,6 +9,6 @@ class DNAServer(BaseDNAServer):
 
     def __new__(cls, *args, **kwargs):
         cls = super().__new__(cls)
-        cls.base_url_string = 'https://{}/dna/intent/api/v1/'
+        cls.base_url_string = 'https://{}/dna/intent/api/v1'
         cls.login_url_string = 'https://{}/api/system/v1/auth/token'
         return cls

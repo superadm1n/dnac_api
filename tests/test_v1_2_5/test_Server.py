@@ -21,4 +21,4 @@ class TestV1_2_5DnaServer(TestCase):
         self.execution_id = self.instance.get('')
 
     def test_passes_correct_base_url(self):
-        self.assertEqual('https://host/dna/intent/api/v1/', self.instance.base_url)
+        self.assertEqual('https://host/dna/intent/api/v1', self.instance.base_url)

@@ -16,9 +16,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from dnac_api.Server import DNAServer
-from dnac_api.lib.kwarg_hander import handle_kwargs
+from dnac_api.v1_2_5.v1_2_5_Server import DNAServer
 
 
 class TemplateProgrammer(DNAServer):
-    pass
+
+    def templates_available(self):
+        '''Lists the templates available. Submits get request to /template-programmer/template
+
+        :return: Templates available
+        :rtype: list
+        '''
+        return self.get_handler('/template-programmer/template')
+
+    def projects(self):
+        return self.get_handler('/template-programmer/project')
