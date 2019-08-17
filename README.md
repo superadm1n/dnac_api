@@ -1,6 +1,10 @@
 [![Build Status](https://travis-ci.org/superadm1n/dnac_api.svg?branch=master)](https://travis-ci.org/superadm1n/dnac_api)
 [![Documentation Status](https://readthedocs.org/projects/dnac-api/badge/?version=latest)](https://dnac-api.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/superadm1n/dnac_api/badge.svg?branch=master)](https://coveralls.io/github/superadm1n/dnac_api?branch=master)
+![](https://img.shields.io/badge/python-3.5-blue.svg)
+![](https://img.shields.io/badge/python-3.6-blue.svg)
+[![](https://img.shields.io/badge/python-3.7.3-blue.svg)](https://www.python.org/downloads/release/python-373/)
+[![](https://img.shields.io/badge/python-3.7.4-blue.svg)](https://www.python.org/downloads/release/python-374/)
 
 # dnac_api
 > Python API for interfacing with the Cisco DNA Center REST API
