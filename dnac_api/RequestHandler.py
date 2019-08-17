@@ -35,6 +35,8 @@ class RequestHandler:
             return ResponseObject(status_code=[x for x in HTTPStatus if x == raw_data.status_code][0], response_data=raw_data.json()['response'])
         except KeyError:
             return ResponseObject(status_code=[x for x in HTTPStatus if x == raw_data.status_code][0], response_data=raw_data.json())
+        except TypeError:
+            return ResponseObject(status_code=[x for x in HTTPStatus if x == raw_data.status_code][0], response_data=raw_data.json())
 
     def request(self, method, url, **kwargs):
         return self._extract_data_from_raw(self._request(method, url, **kwargs))

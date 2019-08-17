@@ -24,7 +24,14 @@ class DNAServer(RequestHandler):
     """
     This class handles interfacing the api level of the package with the handling of the requests to the DNA server.
     It provides a standard way for the rest of the package to send data to the DNA Center server.
+
+    Each version of the API should override the __new__() method to make sure the proper base URL string is used.
     """
+
+    def __new__(cls, *args, **kwargs):
+        cls.base_url_string = 'https://{}/api/v1'
+        cls.login_url_string = 'https://{}/api/system/v1/auth/token'
+        return super().__new__(cls)
 
     def __init__(self, dna_server, username, password, verify=False):
         super().__init__()
@@ -32,7 +39,7 @@ class DNAServer(RequestHandler):
         self.username = username
         self.password = password
         self.verify = verify
-        self.base_url = 'https://{}/api/v1'.format(self.dna_server)
+        self.base_url = self.base_url_string.format(self.dna_server)
 
         self.session_token = self._login()
 
@@ -42,7 +49,7 @@ class DNAServer(RequestHandler):
 
         :return:
         """
-        url = "https://{}/api/system/v1/auth/token".format(self.dna_server)
+        url = self.login_url_string.format(self.dna_server)
         response = self.request("POST", url, auth=HTTPBasicAuth(self.username, self.password), verify=False)
         return response.response_data["Token"]
 
@@ -57,14 +64,11 @@ class DNAServer(RequestHandler):
         :type params: dict
         :return: raw response from the DNAC server. Currently passes up the object that is given from the requests package
         """
-        headers = {}
-        if custom_headers:
-            for key, value in custom_headers.items():
-                headers[key] = value
-        headers["x-auth-token"] = self.session_token
+        if custom_headers is None:
+            custom_headers = {}
+        custom_headers["x-auth-token"] = self.session_token
 
-        response = self.get('{}{}'.format(self.base_url, url), headers=headers, params=params, verify=self.verify)
-        return response
+        return self.get('{}{}'.format(self.base_url, url), headers=custom_headers, params=params, verify=self.verify)
 
     def post_handler(self, url, data, custom_headers=None):
         """Handles sending a post request to the DNA Center Server
@@ -76,14 +80,12 @@ class DNAServer(RequestHandler):
         :type custom_headers:dict
         :return:
         """
-        headers = {}
-        if custom_headers:
-            for key, value in custom_headers.items():
-                headers[key] = value
-        headers["x-auth-token"] = self.session_token
-        headers['Content-Type'] = 'application/json'
+        if custom_headers is None:
+            custom_headers = {}
+        custom_headers["x-auth-token"] = self.session_token
+        custom_headers['Content-Type'] = 'application/json'
 
-        return self.post('{}{}'.format(self.base_url, url), data=json.dumps(data), headers=headers)
+        return self.post('{}{}'.format(self.base_url, url), data=json.dumps(data), headers=custom_headers)
 
     def put_handler(self, url, data, custom_headers=None):
         """
@@ -93,13 +95,11 @@ class DNAServer(RequestHandler):
         :param custom_headers:
         :return:
         """
-        headers = {}
-        if custom_headers:
-            for key, value in custom_headers.items():
-                headers[key] = value
-        headers["x-auth-token"] = self.session_token
+        if custom_headers is None:
+            custom_headers = {}
+        custom_headers["x-auth-token"] = self.session_token
 
-        return self.put('{}{}'.format(self.base_url, url), data=data, headers=headers)
+        return self.put('{}{}'.format(self.base_url, url), data=data, headers=custom_headers)
 
     def response_handler(self, response):
         """Extracts the data that was sent back from the server. Not sure if I will keep this in as it
