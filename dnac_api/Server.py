@@ -64,14 +64,11 @@ class DNAServer(RequestHandler):
         :type params: dict
         :return: raw response from the DNAC server. Currently passes up the object that is given from the requests package
         """
-        headers = {}
-        if custom_headers:
-            for key, value in custom_headers.items():
-                headers[key] = value
-        headers["x-auth-token"] = self.session_token
+        if custom_headers is None:
+            custom_headers = {}
+        custom_headers["x-auth-token"] = self.session_token
 
-        response = self.get('{}{}'.format(self.base_url, url), headers=headers, params=params, verify=self.verify)
-        return response
+        return self.get('{}{}'.format(self.base_url, url), headers=custom_headers, params=params, verify=self.verify)
 
     def post_handler(self, url, data, custom_headers=None):
         """Handles sending a post request to the DNA Center Server
@@ -83,14 +80,12 @@ class DNAServer(RequestHandler):
         :type custom_headers:dict
         :return:
         """
-        headers = {}
-        if custom_headers:
-            for key, value in custom_headers.items():
-                headers[key] = value
-        headers["x-auth-token"] = self.session_token
-        headers['Content-Type'] = 'application/json'
+        if custom_headers is None:
+            custom_headers = {}
+        custom_headers["x-auth-token"] = self.session_token
+        custom_headers['Content-Type'] = 'application/json'
 
-        return self.post('{}{}'.format(self.base_url, url), data=json.dumps(data), headers=headers)
+        return self.post('{}{}'.format(self.base_url, url), data=json.dumps(data), headers=custom_headers)
 
     def put_handler(self, url, data, custom_headers=None):
         """
@@ -100,13 +95,11 @@ class DNAServer(RequestHandler):
         :param custom_headers:
         :return:
         """
-        headers = {}
-        if custom_headers:
-            for key, value in custom_headers.items():
-                headers[key] = value
-        headers["x-auth-token"] = self.session_token
+        if custom_headers is None:
+            custom_headers = {}
+        custom_headers["x-auth-token"] = self.session_token
 
-        return self.put('{}{}'.format(self.base_url, url), data=data, headers=headers)
+        return self.put('{}{}'.format(self.base_url, url), data=data, headers=custom_headers)
 
     def response_handler(self, response):
         """Extracts the data that was sent back from the server. Not sure if I will keep this in as it
