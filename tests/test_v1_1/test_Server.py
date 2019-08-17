@@ -18,7 +18,16 @@ class TestV1_1DnaServer(TestCase):
 
     def setUp(self) -> None:
         self.instance = TestableDNAServer('host', 'user', 'pass')
-        self.execution_id = self.instance.get('')
+        self.execution_id = self.instance.get_handler('')
 
     def test_passes_correct_base_url(self):
         self.assertEqual('https://host/api/v1', self.instance.base_url)
+
+    def test_get_directly_passes_response_object(self):
+        self.assertEqual(int, type(self.instance.get_handler('')))
+
+    def test_post_directly_passes_response_object(self):
+        self.assertEqual(int, type(self.instance.post_handler('', '')))
+
+    def test_put_directly_passes_response_object(self):
+        self.assertEqual(int, type(self.instance.put_handler('', '')))
