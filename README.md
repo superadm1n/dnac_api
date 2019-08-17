@@ -30,8 +30,8 @@ Using v1.1 of the API to get the number of hosts in the DNA Appliance
 ```python
 from dnac_api.v1_1 import NetworkHost
 
-dnac = NetworkHost('https://dnacserver.local', 'myUsername', 'myPassword')
-print(dnac.num_of_hosts)
+dnac = NetworkHost('dnacserver.local', 'myUsername', 'myPassword')
+print(dnac.num_of_hosts())
 
 ```
 
