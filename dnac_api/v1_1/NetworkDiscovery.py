@@ -37,7 +37,7 @@ class GlobalCredentials(DNAServer):
         '''
         url = '{}/{}'.format(self.url, credential_id)
         response = self.get_handler(url)
-        return self.response_handler(response)
+        return response
 
     def cli(self, **kwargs):
         """This method is used to get global CLI credentials. This method gets to
@@ -52,7 +52,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'CLI'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_cli_credentials(self, username, password, enable_password, comments,  description):
         """Sends POST request to ``/global-credential/cli`` to create new cli credential entry.
@@ -80,7 +80,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'SNMPV2_READ_COMMUNITY'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_snmpv2_read(self, community_string, comments, description):
         """Creates new SNMPv2 Read credentials by submitting a post request to ``/global-credential/snmpv2-read-community``
@@ -109,7 +109,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'SNMPV2_WRITE_COMMUNITY'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_snmpv2_write(self, community_string, comments, description):
         """Creates new SNMPv2 Write credentials by submitting a post request to ``/global-credential/snmpv2-write-community``
@@ -138,7 +138,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'SNMPV3'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_snmpv3_credentials(self, privacy_password, privacy_type, snmp_mode, auth_type, auth_password, username, comments, description):
         """Creates new SNMPv3 credentials by submitting a post request to ``/global-credential/snmpv3``
@@ -171,7 +171,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'HTTP_WRITE'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_http_write_credentials(self, username, password, port, secure, comments, description):
         """Creates new HTTP Write credentials by submitting a post request to ``/global-credential/http-write``
@@ -209,7 +209,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'HTTP_READ'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_http_read_credentials(self, username, password, port, secure, comments, description):
         """Creates new HTTP Read credentials by submitting a post request to ``/global-credential/http-read``
@@ -246,7 +246,7 @@ class GlobalCredentials(DNAServer):
         url_params = {'credentialSubType': 'NETCONF'}
         url_params = handle_kwargs(url_params, self.allowed_kwargs, **kwargs)
         response = self.get_handler(self.url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def create_netconf_credentials(self, netconf_port, comments, description):
         """Creates new netconf credentials by submitting a post request to ``/global-credential/netconf``
@@ -272,7 +272,7 @@ class Discoveries(DNAServer):
         :return:
         """
         url = '/discovery/count'
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def start_discovery_process(self, **kwargs):
         """Initiates discovery with the given parameters
@@ -345,7 +345,7 @@ class Discoveries(DNAServer):
         :return:
         """
         url = '/discovery/{}'.format(discovery_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def discovery_jobs_by_id(self, discovery_id, **kwargs):
         """Returns discovery jobs by specified ID.
@@ -361,7 +361,7 @@ class Discoveries(DNAServer):
         allowed_kwargs = ['offset', 'limit', 'ipAddress']
         url = '/discovery/{}/job'.format(discovery_id)
         url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
-        return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
+        return self.get_handler(url, params=url_params if url_params else None)
 
     def network_devices_from_discovery_by_filters(self, discovery_id, **kwargs):
         """
@@ -386,7 +386,7 @@ class Discoveries(DNAServer):
         allowed_kwargs = ['taskId', 'sortyBy', 'sortOrder', 'ipAddress', 'pingStatus', 'snmpStatus', 'cliStatus', 'netconfStatus', 'httpStatus']
         url = '/discovery/{}/summary'.format(discovery_id)
         url_params = handle_kwargs(params={}, allowed_kwargs=allowed_kwargs, **kwargs)
-        return self.response_handler(self.get_handler(url, params=url_params if url_params else None))
+        return self.get_handler(url, params=url_params if url_params else None)
 
     def discovery_jobs_for_ip(self, ip, **kwargs):
         """Return discovery jobs associated with an IP address
@@ -406,7 +406,7 @@ class Discoveries(DNAServer):
         url_params = handle_kwargs(url_params, allowed_kwargs=allowed_kwargs, **kwargs)
 
         response = self.get_handler(url, params=url_params)
-        return self.response_handler(response)
+        return response
 
     def num_network_devices_in_discovery(self, discovery_id):
         """Get number of network devices in a discovery. Sends a post request to ``/discovery/{discovery-id}/network-device/count``
@@ -415,7 +415,7 @@ class Discoveries(DNAServer):
         :return: number of network devices in discovery
         """
         url = '/discovery/{}/network-device/count'.format(discovery_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def physical_topology(self):
         """Sends get request to ``/topology/physical-topology`` to get the physical topology data.
@@ -423,7 +423,7 @@ class Discoveries(DNAServer):
         :return: Physical topology data
         """
         url = '/topology/physical-topology'
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
 
 class NetworkDiscovery(GlobalCredentials, Discoveries):

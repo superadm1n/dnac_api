@@ -12,9 +12,6 @@ class credential_sub_type(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/global-credential/junk')
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class cli(TestCase):
 
@@ -35,9 +32,6 @@ class cli(TestCase):
         bad_kwargs = {'bad_kwarg': 'junk', 'order': 'junk'}
         with self.assertRaises(KeyError):
             self.instance.cli(**bad_kwargs)
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'CLI'})
@@ -77,9 +71,6 @@ class snmpv2_read(TestCase):
         with self.assertRaises(KeyError):
             self.instance.snmpv2_read(**bad_kwargs)
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'SNMPV2_READ_COMMUNITY'})
 
@@ -112,9 +103,6 @@ class snmpv2_write(TestCase):
         with self.assertRaises(KeyError):
             self.instance.snmpv2_write(**bad_kwargs)
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'SNMPV2_WRITE_COMMUNITY'})
 
@@ -145,9 +133,6 @@ class snmpv3(TestCase):
         bad_kwargs = {'bad_kwarg': 'junk', 'order': 'junk'}
         with self.assertRaises(KeyError):
             self.instance.snmpv3(**bad_kwargs)
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'SNMPV3'})
@@ -184,9 +169,6 @@ class http_write(TestCase):
         with self.assertRaises(KeyError):
             self.instance.http_write(**bad_kwargs)
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'HTTP_WRITE'})
 
@@ -219,9 +201,6 @@ class http_read(TestCase):
         with self.assertRaises(KeyError):
             self.instance.http_read(**bad_kwargs)
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'HTTP_READ'})
 
@@ -253,9 +232,6 @@ class netconf(TestCase):
         bad_kwargs = {'bad_kwarg': 'junk', 'order': 'junk'}
         with self.assertRaises(KeyError):
             self.instance.netconf(**bad_kwargs)
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
     def test_always_passes_credentialSubType(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], {'credentialSubType': 'NETCONF'})

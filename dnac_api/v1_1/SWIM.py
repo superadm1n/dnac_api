@@ -32,7 +32,7 @@ class SWIM(DNAServer):
         :return:
         """
         url = '/device-image/device/{}/file'.format(device_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def file_systems_on_device(self, device_id):
         """Gets the file systems configured on device. Sends a get request to ``/device-image/device/{id}/file-system``
@@ -41,7 +41,7 @@ class SWIM(DNAServer):
         :return: File Systems
         """
         url = '/device-image/device/{}/file-system'.format(device_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def image_details_with_filter(self, **kwargs):
         '''
@@ -49,7 +49,7 @@ class SWIM(DNAServer):
         https://developer.cisco.com/site/dna-center-rest-api/?version=1.1
         '''
         url = '/image/importation'
-        return self.response_handler(self.get_handler(url, params=kwargs))
+        return self.get_handler(url, params=kwargs)
 
     def num_images_in_swim(self, **kwargs):
         '''
@@ -57,17 +57,17 @@ class SWIM(DNAServer):
         https://developer.cisco.com/site/dna-center-rest-api/?version=1.1
         '''
         url = '/image/importation/count'
-        return self.response_handler(self.get_handler(url, params=kwargs))
+        return self.get_handler(url, params=kwargs)
 
     def image_by_uuid(self, image_uuid):
         url = '/image/importation/{}'.format(image_uuid)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def patch_details_respect_to_base_image(self, image_uuid, site_uuid, device_type_ordinal):
         url = '/image/importation/{image_uuid}/site/{site_uuid}/deviceType/{device_type_ordinal}/patch'.format(
             **{'image_uuid': image_uuid, 'site_uuid': site_uuid, 'device_type_ordinal': device_type_ordinal})
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def recommended_image(self, device_uuid):
         url = '/image/recommendation/device/{}'.format(device_uuid)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)

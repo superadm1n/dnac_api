@@ -12,9 +12,6 @@ class number_of_discoveries(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/count')
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class discovery_by_id(TestCase):
     def setUp(self) -> None:
@@ -25,9 +22,6 @@ class discovery_by_id(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/{}'.format(self.passed_id))
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class discovery_jobs_by_id(TestCase):
     def setUp(self) -> None:
@@ -37,9 +31,6 @@ class discovery_jobs_by_id(TestCase):
 
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/{}/job'.format(self.passed_id))
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
     def test_accepts_kwargs(self):
         kwargs = {'offset': 'junk', 'limit': 'junk', 'ipAddress': 'junk'}
@@ -61,9 +52,6 @@ class network_devices_from_discovery_by_filters(TestCase):
 
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/{}/summary'.format(self.passed_id))
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
     def test_accepts_kwargs(self):
         kwargs = {'taskId': 'junk', 'sortyBy': 'junk', 'sortOrder': 'junk', 'ipAddress': 'junk', 'pingStatus': 'junk', 'snmpStatus': 'junk',
@@ -87,9 +75,6 @@ class discovery_jobs_for_ip(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/job')
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_accepts_kwargs(self):
         kwargs = {'offset': 'junk', 'limit': 'junk', 'name': 'junk'}
         id = self.instance.discovery_jobs_for_ip(self.passed_id, **kwargs)
@@ -110,9 +95,6 @@ class num_network_devices_in_discovery(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/discovery/{}/network-device/count'.format(self.passed_id))
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class physical_topology(TestCase):
     def setUp(self) -> None:
@@ -121,6 +103,3 @@ class physical_topology(TestCase):
 
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/topology/physical-topology')
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)

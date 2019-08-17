@@ -15,9 +15,6 @@ class TestModulesInDevice(TestCase):
     def test_passes_correct_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/module')
 
-    def test_calls_response_handler_once(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_allows_correct_kwargs(self):
         kwargs = {'deviceId': 'junk', 'nameList': 'junk', 'vendorEquipmentTypeList': 'junk', 'partNumberList': 'junk', 'operationalStateCodeList': 'junk'}
         t = TestableModules()
@@ -43,9 +40,6 @@ class TestNumberofModulesinDevice(TestCase):
     def test_passes_correct_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/module/count')
 
-    def test_calls_response_handler_once(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
     def test_allows_correct_kwargs(self):
         kwargs = {'deviceId': 'junk', 'nameList': 'junk', 'vendorEquipmentTypeList': 'junk', 'partNumberList': 'junk', 'operationalStateCodeList': 'junk'}
         t = TestableModules()
@@ -70,6 +64,3 @@ class TestModuleInfoById(TestCase):
 
     def test_passes_correct_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/module/{}'.format(self.module_id_used))
-
-    def test_calls_response_handler_once(self):
-        self.assertEqual(self.instance.response_handler_called, 1)

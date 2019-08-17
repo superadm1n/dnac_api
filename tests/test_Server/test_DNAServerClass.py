@@ -84,13 +84,13 @@ class TestPostHandler(TestCase):
         self.assertEqual(self.instance.post_kwargs_passed[id]['headers']['HeaderKey'], 'HeaderValue')
 
 
-class TestResponseHandler(TestCase):
-    def setUp(self) -> None:
-        self.instance = TestableDNAServer('host', 'user', 'password')
-
-    def test_basic_test(self):
-        return_obj = ResponseObject(status_code=200, response_data='JunkResponse')
-        self.assertEqual('JunkResponse', self.instance.response_handler(return_obj))
+# class TestResponseHandler(TestCase):
+#     def setUp(self) -> None:
+#         self.instance = TestableDNAServer('host', 'user', 'password')
+#
+#     def test_basic_test(self):
+#         return_obj = ResponseObject(status_code=200, response_data='JunkResponse')
+#         self.assertEqual('JunkResponse', self.instance.response_handler(return_obj))
 
 
 class TestPutHandler(TestCase):

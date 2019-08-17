@@ -11,9 +11,6 @@ class TestNetworkDeviceCount(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/count')
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class TestNetworkDevice(TestCase):
 
@@ -23,9 +20,6 @@ class TestNetworkDevice(TestCase):
 
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device')
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
     def test_doesnt_pass_params_without_id_called(self):
         self.assertEqual(self.instance.get_handler_passed_url_paramenters[self.execution_id], None)
@@ -45,9 +39,6 @@ class TestNetworkDeviceByIp(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/ip-address/{}'.format(self.passed_value))
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class TestNetworkDeviceBySerialNumber(TestCase):
 
@@ -58,9 +49,6 @@ class TestNetworkDeviceBySerialNumber(TestCase):
 
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/serial-number/{}'.format(self.sn))
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
 
 
 class TestNetworkDeviceById(TestCase):
@@ -73,9 +61,6 @@ class TestNetworkDeviceById(TestCase):
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/{}'.format(self.val))
 
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)
-
 
 class TestNetworkDeviceBriefById(TestCase):
 
@@ -86,6 +71,3 @@ class TestNetworkDeviceBriefById(TestCase):
 
     def test_passes_proper_url(self):
         self.assertEqual(self.instance.get_handler_passed_url[self.execution_id], '/network-device/{}/brief'.format(self.val))
-
-    def test_calls_response_handler(self):
-        self.assertEqual(self.instance.response_handler_called, 1)

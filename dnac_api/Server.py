@@ -101,11 +101,4 @@ class DNAServer(RequestHandler):
 
         return self.put('{}{}'.format(self.base_url, url), data=data, headers=custom_headers)
 
-    def response_handler(self, response):
-        """Extracts the data that was sent back from the server. Not sure if I will keep this in as it
-        depends on the requests library and I might add extra pre processing of the data returned from the server.
 
-        :param response:
-        :return:
-        """
-        return response.response_data

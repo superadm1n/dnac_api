@@ -48,7 +48,7 @@ class NetworkHost(DNAServer):
         allowed_kwargs = ['limit', 'offset', 'sortBy', 'order', 'hostName', 'hostMac', 'hostType', 'connectedInterfaceName', 'hostIp',
                           'connectedNetworkDeviceIpAddress', 'connectedNetworkDeviceName', 'hostDeviceType', 'subType']
         params = handle_kwargs({}, allowed_kwargs=allowed_kwargs, **kwargs)
-        return self.response_handler(self.get_handler(url='/host', params=params))
+        return self.get_handler(url='/host', params=params)
 
     def num_of_hosts(self, **kwargs):
         """Returns number of hosts. Sends get request to ``/host/count``
@@ -71,7 +71,7 @@ class NetworkHost(DNAServer):
                           'connectedNetworkDeviceName', 'hostDeviceType', 'subType']
         url = '/host/count'
         params = handle_kwargs({}, allowed_kwargs=allowed_kwargs, **kwargs)
-        return self.response_handler(self.get_handler(url, params=params))
+        return self.get_handler(url, params=params)
 
     def host_by_id(self, id):
         """Returns host by ID. Sends a get request to ``/host/{id}``
@@ -80,4 +80,4 @@ class NetworkHost(DNAServer):
         :return:
         """
         url = '/host/{}'.format(id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)

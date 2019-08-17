@@ -29,7 +29,7 @@ class DeviceOperations(DNAServer):
         :return: number of network devices
         """
         url = '/network-device/count'
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def network_devices(self, id=None):
         """Returns the network devices
@@ -38,7 +38,7 @@ class DeviceOperations(DNAServer):
         :return:
         """
         url = '/network-device'
-        return self.response_handler(self.get_handler(url, params={'id': id} if id else None))
+        return self.get_handler(url, params={'id': id} if id else None)
 
     def network_device_by_ip(self, ip):
         """Sends get request to ``/network-device/ip-address/{ip}``
@@ -47,7 +47,7 @@ class DeviceOperations(DNAServer):
         :return: Network device associated with IP
         """
         url = '/network-device/ip-address/{}'.format(ip)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def network_device_by_serial_number(self, device_serial_number):
         """Gets network device by serial number by sending a get request to ``/network-device/serial-number/{sn}``
@@ -56,7 +56,7 @@ class DeviceOperations(DNAServer):
         :return:
         """
         url = '/network-device/serial-number/{}'.format(device_serial_number)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def network_device_by_id(self, id):
         """Gets network device by ID by sending a get request to ``/network-device/{id}``
@@ -65,7 +65,7 @@ class DeviceOperations(DNAServer):
         :return: Network device
         """
         url = '/network-device/{}'.format(id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def network_device_brief_by_id(self, id):
         """Similar to ``network_device_by_id(id)`` but returns brief data.
@@ -74,7 +74,7 @@ class DeviceOperations(DNAServer):
         :return: Network device data - brief
         """
         url = '/network-device/{}/brief'.format(id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
 
 class Modules(DNAServer):
@@ -98,7 +98,7 @@ class Modules(DNAServer):
         url = '/network-device/module'
         params = {'deviceId': device_id}
         params = handle_kwargs(params, allowed_kwargs=allowed_kwargs, **kwargs)
-        return self.response_handler(self.get_handler(url, params=params))
+        return self.get_handler(url, params=params)
 
     def number_of_modules_in_device(self, device_id, **kwargs):
         """Returns the number of modules in a device. Sends get request to ``/network-device/module/count``
@@ -118,7 +118,7 @@ class Modules(DNAServer):
         url = '/network-device/module/count'
         params = {'deviceId': device_id}
         params = handle_kwargs(params, allowed_kwargs=allowed_kwargs, **kwargs)
-        return self.response_handler(self.get_handler(url, params=params))
+        return self.get_handler(url, params=params)
 
     def module_info_by_id(self, module_id):
         """Gets info related to module by the ID of the module. Sends get request to ``/network-device/module/{module_id}``
@@ -127,7 +127,7 @@ class Modules(DNAServer):
         :return: Module info
         """
         url = '/network-device/module/{}'.format(module_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
 
 class Locations(DNAServer):
@@ -139,7 +139,7 @@ class Locations(DNAServer):
         :return:
         """
         url = '/network-device/location'
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def devices_at_location(self, location_id):
         """Get devices at location by location ID. Sends get request to ``/network-device/location/{location_id}``
@@ -148,7 +148,7 @@ class Locations(DNAServer):
         :return: List of devices
         """
         url = '/network-device/location/{}'.format(location_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
     def location_by_device_id(self, device_id):
         """Returns the location of a device when specifying the device ID. Sends get request to ``/network-device/{device_id}/location``
@@ -157,7 +157,7 @@ class Locations(DNAServer):
         :return: Location information
         """
         url = '/network-device/{}/location'.format(device_id)
-        return self.response_handler(self.get_handler(url))
+        return self.get_handler(url)
 
 
 class NetworkDevice(DeviceOperations, Locations, Modules):
